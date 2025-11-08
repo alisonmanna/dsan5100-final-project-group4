@@ -7,6 +7,10 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: eda.qmd
+        text: Exploratory Data Analysis
+      - href: report.qmd
+        text: Project Report
       - about.qmd
 
 format:
