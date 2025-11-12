@@ -1,2 +1,41 @@
-# dsan5100-final-project-group4
+# DSAN 5100 Final Project - Group 4
 GitHub Repository for DSAN 5100 Final Project (Group 4)
+
+# Do Maternal Chronic Health Conditions Affect Pregnancy Outcomes?
+Group Members: Alexa Nakanishi, Alison Manna, Akshay Arun, Katie DiPaolo
+
+## Project Overview
+We investigate whether pre-existing chronic conditions — specifically hypertension and diabetes — impact pregnancy and birth outcomes, such as gestational duration (preterm vs. full-term), delivery method (vaginal vs. cesarean), and neonatal health indicators (birth weight, APGAR scores, NICU admission). This addresses a clinically significant question with clear public health implications.
+
+## Statistical Analyses Ideas
+- Two-sample t-tests (for comparing mean values of two groups to see if difference is significant)
+  - Ideas:
+    - Compare average gestational age between mothers with vs. without hypertension
+    - Compare mean birth weights between diabetic vs. non-diabetic mothers
+- Chi-square Test for independence (if 2 variables are categorical associated or independent)
+  - Ideas:
+    - Test if delivery type (vaginal/cesarean) is independent of diabetes status
+    - Test association between having chronic condition and preterm birth (yes/no)
+- Monte Carlo Simulation 
+  - Generate predicted distributions of birth weights given maternal health conditions
+  - Simulate pregnancy outcomes under different chronic condition prevalence scenarios
+
+## Statistical Method Requirements (from course website)
+
+<details>
+  <summary>Requirements (click to expand)</summary>
+
+  - Hypothesis Testing (use each at least once or twice):
+    - t-tests
+    - Chi-square tests
+    - Bootstrap methods
+    - ANOVA
+    - If any assumption is violated (e.g., normality, equal variances), choose the appropriate non-parametric alternative. Make sure to do the relevant tests to see if these assumptions violates.
+  - Time Series Analysis:
+    - You must analyze at least two time-varying variables.
+    - Use appropriate time-series modeling techniques (e.g., ARIMA, TS EDA).
+    - Model Diagnostics
+
+</details>
+
+## Possible Data Sources

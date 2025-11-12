@@ -1,0 +1,21 @@
+/*-- scss:defaults --*/
+$body-bg: #F7F1DE; 
+$body-color: #af9376;
+$headings-color: #B87C4C; 
+$link-color: #51361f;
+$navbar-bg: #A8BBA3;
+
+/*-- scss:rules --*/
+@import url('https://fonts.cdnfonts.com/css/dm-serif-display');
+@import url('https://fonts.cdnfonts.com/css/signika');
+@import url('https://fonts.cdnfonts.com/css/league-spartan');
+
+body {
+  font-family: 'Signika', sans-serif;
+//   font-family: 'League Spartan', sans-serif;
+  font-size: 17px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'DM Serif Display', sans-serif !important;
+}

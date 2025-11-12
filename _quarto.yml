@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "5100-project-website"
+  title: "DSAN 5100 Final Project"
   navbar:
     left:
       - href: index.qmd
@@ -15,9 +15,9 @@ website:
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme: styles.scss
+    # css: styles.css
     toc: true
+    toc-location: left
 
-
-
+bibliography: references.bib
