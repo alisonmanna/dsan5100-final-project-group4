@@ -1,2 +1,5 @@
 
 /.quarto/
+
+data/raw/natality2024us.csv
+data/cleaned/nber_births_subset.csv
