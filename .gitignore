@@ -2,5 +2,4 @@
 /.quarto/
 
 data/raw/natality2024us.csv
-data/cleaned
 data/all
