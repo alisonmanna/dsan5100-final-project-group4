@@ -7,7 +7,7 @@
 - **precare**: Month that prenatal care began
 - **bmi**: Mother's Pre-Pregnancy BMI
 - **apgar5**: 5-Minute APGAR score (1-10)
-- **dplur**: Plurality of birth (2=twins, etc.)
+- **dplural**: Plurality of birth (2=twins, etc.)
 - **dbwt**: Birthweight
 
 
