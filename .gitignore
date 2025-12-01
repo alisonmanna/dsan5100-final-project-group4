@@ -3,3 +3,7 @@
 
 data/raw/natality2024us.csv
 data/all
+
+# Python virtual environment
+.venv/
+venv/
