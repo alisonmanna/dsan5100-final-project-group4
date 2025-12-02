@@ -137,6 +137,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Project Report</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../hypothesis_testing.html"> 
+<span class="menu-text">Hypothesis Testing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../time_series.html"> 
+<span class="menu-text">Time Series Analysis</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
@@ -164,14 +172,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div id="5abca3e8" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div id="dc1bb114" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>natality_df <span class="op">=</span> pd.read_csv(<span class="st">'../data/cleaned/natality_cleaned.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>natality_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
@@ -332,9 +346,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="1ce32a8a" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(natality_df.shape)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--------"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(natality_df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(10000, 43)
 --------
@@ -349,7 +366,10 @@ Index(['bfacil', 'mager', 'mrace6', 'dmar', 'meduc', 'precare', 'bmi',
 </div>
 </div>
 <div id="fedda296" class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>natality_df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>bfacil        object
 mager          int64
@@ -398,10 +418,13 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="89c08f70" class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bool_df <span class="op">=</span> natality_df.select_dtypes(include<span class="op">=</span>[<span class="st">'bool'</span>])</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>bool_df.head()</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
@@ -562,13 +585,19 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="c1c18bba" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bool_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>(10000, 30)</code></pre>
 </div>
 </div>
 <div id="d713dcc7" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>natality_df[<span class="st">'mrace6'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>array(['White', 'Asian', 'Black', 'More than one race',
        'American Indian or Alaska Native',
@@ -576,7 +605,10 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="f73642bf" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>natality_df[<span class="st">'meduc'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>array(['Some college credit, not a degree', 'Doctorate',
        '9th-12th no diploma', "Bachelor's degree", "Master's degree",
@@ -585,19 +617,28 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="607246a8" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>natality_df[<span class="st">'me_rout'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>array(['Spontaneous', 'Cesarean', 'Vacuum', 'Forceps'], dtype=object)</code></pre>
 </div>
 </div>
 <div id="563d45ad" class="cell" data-execution_count="22">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>natality_df[<span class="st">'dmar'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>array(['Unmarried', 'Married'], dtype=object)</code></pre>
 </div>
 </div>
 <div id="4b031f81" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bool_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>Index(['rf_pdiab', 'rf_gdiab', 'rf_phype', 'rf_ghype', 'rf_ehype', 'no_risks',
        'ip_gon', 'ip_syph', 'ip_chlam', 'ip_hepb', 'ip_hepc', 'no_infec',
@@ -608,13 +649,19 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="b8bf7b75" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>natality_df.select_dtypes(include<span class="op">=</span>[<span class="st">'int64'</span>,<span class="st">'float64'</span>]).columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>Index(['mager', 'precare', 'bmi', 'apgar5', 'dplural', 'combgest', 'dbwt'], dtype='object')</code></pre>
 </div>
 </div>
 <div id="0577f81c" class="cell" data-execution_count="21">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>natality_df[<span class="st">'bfacil'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>array(['Hospital', 'Other', 'Home (intended)',
        'Freestanding Birth Center', 'Home (not intended)',
@@ -622,6 +669,8 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="994e743d" class="cell" data-execution_count="32">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_boxplot(data, column, colname, unit, output_path<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(x<span class="op">=</span>data[column])</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(unit)</span>
@@ -629,9 +678,13 @@ dtype: object</code></pre>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> output_path:</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        plt.savefig(output_path)</span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div id="16018145" class="cell" data-execution_count="36">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plot_boxplot(natality_df, <span class="st">'mager'</span>,<span class="st">"Mother's Age"</span>, <span class="st">"Years"</span>, <span class="st">"../plots/eda/maternal_age_boxplot.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -641,7 +694,10 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="13fb8343" class="cell" data-execution_count="37">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>plot_boxplot(natality_df, <span class="st">'dbwt'</span>, <span class="st">'Birth Weight'</span>, <span class="st">'Grams'</span>, <span class="st">"../plots/eda/birth_weight_boxplot.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -651,12 +707,15 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="182fd962" class="cell" data-execution_count="45">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.hist(natality_df[<span class="st">'apgar5'</span>],bins<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"APGAR Score"</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of APGAR Scores at 5 Minutes Post-Birth"</span>)</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"../plots/eda/apgar_histogram.png"</span>)</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -666,7 +725,10 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="3314bbca" class="cell" data-execution_count="46">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plot_boxplot(natality_df, <span class="st">'bmi'</span>, <span class="st">'Maternal BMI'</span>, <span class="st">'BMI'</span>, <span class="st">"../plots/eda/maternal_bmi_boxplot.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -676,6 +738,8 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="fa7bd237" class="cell" data-execution_count="61">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_piechart(data, column, title, output_path<span class="op">=</span><span class="va">None</span>):   </span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> natality_df[column].value_counts()</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -699,9 +763,13 @@ dtype: object</code></pre>
 <span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> output_path:</span>
 <span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>        plt.savefig(output_path)</span>
 <span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div id="96d06c94" class="cell" data-execution_count="62">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plot_piechart(natality_df, <span class="st">'mrace6'</span>, <span class="st">"Racial Groups"</span>, <span class="st">"../plots/eda/pie_charts/racial_groups_piechart.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -711,7 +779,10 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="94c37204" class="cell" data-execution_count="63">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plot_piechart(natality_df, <span class="st">'bfacil'</span>, <span class="st">'Birth Facility Type'</span>, <span class="st">'../plots/eda/pie_charts/faciltiy_type_piechart.png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -721,7 +792,10 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="280ad721" class="cell" data-execution_count="64">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plot_piechart(natality_df, <span class="st">'dmar'</span>,<span class="st">"Maternal Marital Status"</span>, <span class="st">"../plots/eda/pie_charts/marital_status_piechart.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -731,7 +805,10 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="caf446f4" class="cell" data-execution_count="65">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plot_piechart(natality_df, <span class="st">'meduc'</span>, <span class="st">"Maternal Education Level"</span>, <span class="st">"../plots/eda/pie_charts/education_level_piechart.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -741,7 +818,10 @@ dtype: object</code></pre>
 </div>
 </div>
 <div id="66e98b5d" class="cell" data-execution_count="66">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plot_piechart(natality_df, <span class="st">'me_rout'</span>, <span class="st">"Delivery Method"</span>, <span class="st">"../plots/eda/pie_charts/delivery_method_piechart.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">

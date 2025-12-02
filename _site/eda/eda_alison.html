@@ -138,6 +138,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Project Report</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../hypothesis_testing.html"> 
+<span class="menu-text">Hypothesis Testing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../time_series.html"> 
+<span class="menu-text">Time Series Analysis</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
@@ -201,15 +209,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div id="3fd962e1" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pointbiserialr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div id="890ec459" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'../data/cleaned/natality_cleaned.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -372,9 +386,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-overview" class="level3">
 <h3 class="anchored" data-anchor-id="data-overview">Data Overview</h3>
 <div id="8c3561c2" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of rows: </span><span class="sc">{</span><span class="bu">len</span>(data)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Data types: </span><span class="sc">{</span>data<span class="sc">.</span>dtypes<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Summary stats: </span><span class="sc">{</span>data<span class="sc">.</span>describe()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of rows: 10000
 
@@ -448,6 +465,8 @@ max       47.00000   4593.000000  </code></pre>
 <section id="inspect-categorical-variables" class="level3">
 <h3 class="anchored" data-anchor-id="inspect-categorical-variables">Inspect Categorical Variables</h3>
 <div id="277329f6" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rename w category tags: </span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># _E = exposure, _O = outcome, _C = covariate, _X = other</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>rename_map <span class="op">=</span> {</span>
@@ -497,17 +516,21 @@ max       47.00000   4593.000000  </code></pre>
 <span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.rename(columns<span class="op">=</span>rename_map)</span>
 <span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Columns now:"</span>, <span class="bu">list</span>(data.columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Columns now: ['birth_place_C', 'mother_age_C', 'mother_race_C', 'marital_status_C', 'mother_education_C', 'prenatal_care_month_C', 'bmi_C', 'risk_prepreg_diabetes_E', 'risk_gest_diabetes_E', 'risk_pre_hypertension_E', 'risk_gest_hypertension_E', 'risk_eclampsia_E', 'no_risks_reported_X', 'infection_gonorrhea_E', 'infection_syphilis_E', 'infection_chlamydia_E', 'infection_hepb_E', 'infection_hepc_E', 'no_infections_reported_X', 'labor_induction_X', 'labor_augmentation_X', 'steroids_X', 'antibiotics_X', 'chorioamnionitis_X', 'anesthesia_X', 'delivery_method_O', 'maternal_transfusion_X', 'perineal_laceration_X', 'uterine_rupture_X', 'unplanned_hysterectomy_X', 'admit_icu_X', 'apgar5_O', 'multiples_count_C', 'infant_sex_C', 'gestation_weeks_O', 'birth_weight_g_O', 'assist_vent_immediate_O', 'assist_vent_gt6hr_O', 'nicu_admission_O', 'surfactant_O', 'newborn_antibiotics_O', 'newborn_seizures_O', 'no_abnormal_conditions_X']</code></pre>
 </div>
 </div>
 <div id="754d0842" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show numpy arrays of uniques</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># make dplural, precare columns categorical</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'multiples_count_C'</span>] <span class="op">=</span> data[<span class="st">'multiples_count_C'</span>].astype(<span class="st">'category'</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'prenatal_care_month_C'</span>] <span class="op">=</span> data[<span class="st">'prenatal_care_month_C'</span>].astype(<span class="st">'category'</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'apgar5_O'</span>] <span class="op">=</span> data[<span class="st">'apgar5_O'</span>].astype(<span class="st">'category'</span>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>data.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>, <span class="st">'category'</span>]).<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.unique())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>birth_place_C            [Hospital, Other, Home (intended), Freestandin...
 mother_race_C            [White, Asian, Black, More than one race, Amer...
@@ -528,8 +551,11 @@ dtype: object</code></pre>
 <section id="numerical-variables" class="level3">
 <h3 class="anchored" data-anchor-id="numerical-variables">Numerical Variables</h3>
 <div id="bbe8d9d6" class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>num_df <span class="op">=</span> data.select_dtypes(include<span class="op">=</span>[<span class="st">'int64'</span>, <span class="st">'float64'</span>])</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>num_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
@@ -590,9 +616,12 @@ dtype: object</code></pre>
 <section id="pairplot" class="level3">
 <h3 class="anchored" data-anchor-id="pairplot">Pairplot</h3>
 <div id="f121f454" class="cell" data-execution_count="29">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pairplot of sample</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pairplot <span class="op">=</span> sns.pairplot(num_df.sample(n<span class="op">=</span><span class="dv">3000</span>, random_state<span class="op">=</span><span class="dv">5100</span>))</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"../plots/eda/multivar/pairplot_natality_numeric_sample.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -605,6 +634,8 @@ dtype: object</code></pre>
 <section id="proportionsfrequencies" class="level3">
 <h3 class="anchored" data-anchor-id="proportionsfrequencies">Proportions/Frequencies</h3>
 <div id="c9f6caf6" class="cell" data-execution_count="31">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For binary outcomes</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> outcome <span class="kw">in</span> [<span class="st">'assist_vent_immediate_O'</span>, <span class="st">'nicu_admission_O'</span>, <span class="st">'newborn_seizures_O'</span>]:</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    prop_table <span class="op">=</span> pd.crosstab(</span>
@@ -629,6 +660,7 @@ dtype: object</code></pre>
 <span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">'Proportion'</span>) </span>
 <span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"../plots/eda/multivar/crosstab_natality_exposures_outcomes.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 assist_vent_immediate_O:
@@ -661,6 +693,8 @@ True                1.000000  0.000000</code></pre>
 <section id="heatmap" class="level3">
 <h3 class="anchored" data-anchor-id="heatmap">Heatmap</h3>
 <div id="d9fe88cb" class="cell" data-execution_count="32">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>exposure_vars <span class="op">=</span> [<span class="st">'risk_prepreg_diabetes_E'</span>, <span class="st">'risk_gest_diabetes_E'</span>, <span class="st">'risk_pre_hypertension_E'</span>, <span class="st">'risk_gest_hypertension_E'</span>, <span class="st">'risk_eclampsia_E'</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate raw proportion differences (no testing yet)</span></span>
@@ -686,6 +720,7 @@ True                1.000000  0.000000</code></pre>
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>            center<span class="op">=</span><span class="dv">0</span>, fmt<span class="op">=</span><span class="st">'.3f'</span>)</span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Difference in Outcome Proportions</span><span class="ch">\n</span><span class="st">(Exposed - Unexposed)'</span>)</span>
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"../plots/eda/multivar/prop_diff_heatmap_natality.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -698,6 +733,8 @@ True                1.000000  0.000000</code></pre>
 <section id="apgar-score-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="apgar-score-distribution">APGAR score distribution</h3>
 <div id="9ac69dba" class="cell" data-execution_count="38">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">10</span>))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten() <span class="co"># flatten, use single index for iteration</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -714,6 +751,7 @@ True                1.000000  0.000000</code></pre>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"../plots/eda/multivar/apgar_by_exposures_natality.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -726,6 +764,8 @@ True                1.000000  0.000000</code></pre>
 <section id="boxplots-of-continuous-outcomes-by-conditionexposure" class="level3">
 <h3 class="anchored" data-anchor-id="boxplots-of-continuous-outcomes-by-conditionexposure">Boxplots of Continuous Outcomes by Condition/Exposure</h3>
 <div id="13f33f4f" class="cell" data-execution_count="41">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(hspace<span class="op">=</span><span class="fl">0.35</span>, wspace<span class="op">=</span><span class="fl">0.3</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -745,6 +785,7 @@ True                1.000000  0.000000</code></pre>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">''</span>)  <span class="co"># remove automatic suptitle </span></span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"../plots/eda/multivar/boxplots_natality_exposures_outcomes.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -757,6 +798,8 @@ True                1.000000  0.000000</code></pre>
 <section id="remove-violinbox-plots" class="level3">
 <h3 class="anchored" data-anchor-id="remove-violinbox-plots">REMOVE: Violin/Box Plots</h3>
 <div id="cacb1f32" class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># violin / box plots to explore exposures -&gt; outcomes with optional covariates</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -829,8 +872,11 @@ True                1.000000  0.000000</code></pre>
 <span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>        <span class="co"># then with covariates (if present)</span></span>
 <span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> cov <span class="kw">in</span> covariates:</span>
 <span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>            plot_exposure_vs_outcome(data, exp, out, covariate<span class="op">=</span>cov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div id="3b0f420e" class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bool_cols <span class="op">=</span> data.select_dtypes(include<span class="op">=</span>[<span class="st">'bool'</span>]).columns</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>num_cols <span class="op">=</span> data.select_dtypes(include<span class="op">=</span>[<span class="st">'int64'</span>,<span class="st">'float64'</span>]).columns</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>pb <span class="op">=</span> pd.DataFrame(index<span class="op">=</span>bool_cols, columns<span class="op">=</span>num_cols, dtype<span class="op">=</span><span class="bu">float</span>)</span>
@@ -847,6 +893,7 @@ True                1.000000  0.000000</code></pre>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Point-biserial correlation (bool vs numeric)"</span>)</span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 
 

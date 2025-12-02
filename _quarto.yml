@@ -11,6 +11,10 @@ website:
         text: Exploratory Data Analysis
       - href: report.qmd
         text: Project Report
+      - href: hypothesis_testing.qmd
+        text: Hypothesis Testing
+      - href: time_series.qmd
+        text: Time Series Analysis
       - about.qmd
 
 format:
@@ -19,5 +23,7 @@ format:
     # css: styles.css
     toc: true
     toc-location: left
+    code-fold: true
+    code-summary: "Click to see code"
 
 bibliography: references.bib

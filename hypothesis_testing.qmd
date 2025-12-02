@@ -1,0 +1,176 @@
+---
+title: "Hypothesis Testing"
+---
+
+# Introduction/Background
+
+explain questions we try to answer with the hypothesis tests & how they work
+
+## Welch's two-sample t-Test (unequal variances)
+
+> *Question: Do births to mothers with a chronic condition (diabetes or hypertension) have a different mean detailed birth weight (dbwt) than births to mothers without a chronic condition?*
+
+- **Null hypothesis** ($H_0$): $\mu_{chronic} = \mu_{nonchronic}$ — the mean birth weight is the same for the chronic and non‑chronic groups.
+- **Alternative hypothesis** ($H_1$): $\mu_{chronic} \neq \mu_{nonchronic}$ — the mean birth weight differs between the two groups.
+
+Hypothesis test: two-sample t-test using R's t.test() function to compare the means of the two independent groups with unequal variances.
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(car)
+library(rstatix)
+```
+
+```{r}
+df <- read.csv("data/cleaned/natality_cleaned.csv")
+
+#detailed birth weight 
+outcome <- "dbwt"
+
+#creating chronic condition flag based on columns (true = chronic)
+df$chronic_condition <- ifelse(
+  df$rf_pdiab == 1 | df$rf_gdiab == 1 |
+  df$rf_phype == 1 | df$rf_ghype == 1 |
+  df$rf_ehype == 1,
+  1, 0
+)
+
+#splitting into chronic vs non-chronic groups 
+group_chronic <- df %>%
+  filter(chronic_condition == 1) %>%
+  pull(outcome)
+
+group_nonchronic <- df %>%
+  filter(chronic_condition == 0) %>%
+  pull(outcome)
+
+#running independent samples t-test 
+t_test_result <- t.test(group_chronic, group_nonchronic)
+
+print("T-Test Results:")
+print(t_test_result)
+```
+
+[interpretation]
+
+## Chi-Squared Test
+
+## Bootstrap
+
+## ANOVA
+
+> *Question: Does the presence of maternal chronic conditions (diabetes and/or hypertension) significantly affect birth weight?*
+
+- **Null hypothesis** ($H_0$): The mean birth weight is equal across all four condition groups.
+
+$$H_0: \mu_{\text{none}} = \mu_{\text{diabetes}} = \mu_{\text{hypertension}} = \mu_{\text{both}}$$
+
+- **Alternative hypothesis** ($H_1$):At least one condition group has a different mean birth weight compared to the others.
+
+$$H_a: \text{At least one } \mu_i \text{ is different}$$
+
+Significance level: $\alpha = 0.05$
+
+### Data Preparation
+```{r}
+# load data
+births <- read.csv("data/cleaned/natality_cleaned.csv")
+# head(births)
+```
+
+```{r}
+# Create condition groups for analysis
+births_clean <- births |>
+  mutate(
+    # CBinary indicators for any diabetes
+    has_diabetes = ifelse(rf_pdiab == TRUE | rf_gdiab == TRUE, 1, 0),
+    
+    # Binary indicator for any hypertension
+    has_hypertension = ifelse(rf_phype == TRUE | rf_ghype == TRUE | 
+                              rf_ehype == TRUE, 1, 0),
+    
+    # Create 4 condition groups
+    condition_group = case_when(
+      has_diabetes == 0 & has_hypertension == 0 ~ "No Conditions",
+      has_diabetes == 1 & has_hypertension == 0 ~ "Diabetes Only",
+      has_diabetes == 0 & has_hypertension == 1 ~ "Hypertension Only",
+      has_diabetes == 1 & has_hypertension == 1 ~ "Both Conditions"
+    ),
+    
+    # Convert to factor w/ ordered levels
+    condition_group = factor(condition_group, 
+                            levels = c("No Conditions", "Diabetes Only", 
+                                     "Hypertension Only", "Both Conditions"))
+  )
+
+# Check sample sizes
+table(births_clean$condition_group)
+```
+
+
+## Assumption Checks
+
+One-way ANOVA requires three key assumptions:
+
+- Independence: Each observation is independent (already satisfied because each birth represents a separate individual)
+- Normality: Birth weights within each group are approximately normally distributed 
+- Homogeneity of variance: All groups have equal variances
+
+### Normality Check
+```{r}
+# Q-Q plots for each group
+par(mfrow = c(2, 2))
+for(group in levels(births_clean$condition_group)) {
+  data_subset <- births_clean$dbwt[births_clean$condition_group == group]
+  qqnorm(data_subset, main = paste("Q-Q Plot:", group))
+  qqline(data_subset, col = "red")
+}
+par(mfrow = c(1, 1))
+```
+
+The Q-Q plots show that birth weights generally follow a normal distribution for all groups, with most points falling along the diagonal line.
+
+### Homogeneity of Variance Check
+```{r}
+# Levene's test
+levene_result <- leveneTest(dbwt ~ condition_group, data = births_clean)
+print(levene_result)
+```
+
+The Levene's test null hypothesis is that the groups have equal variances.
+Since F = 5.4543 and p = 0.0009611 (p < 0.001), we reject the null and conclude that there is strong evidence that variances differ across the groups. The homogeneity of variance assumption is violated, so we will use **Welch's ANOVA**, which is more robust to violations of the equal variance assumption.
+
+## Welch's ANOVA
+```{r}
+welch_result <- oneway.test(dbwt ~ condition_group, data = births_clean, var.equal = FALSE)
+print(welch_result)
+```
+
+Welch's ANOVA shows a highly significant difference in mean birth weight across the conditions levels (F = 41.96, num df = 3, denom df = 776.26, p < 2.2e-16). Therefore, we reject H0 and have enough evidence to conclude that not all group means are equal.
+
+## Post-Hoc Tests
+
+```{r}
+# Use Games-Howell bc robust to unequal variances
+games_howell <- births_clean |> games_howell_test(dbwt ~ condition_group)
+print(games_howell)
+```
+
+The post-hoc test showed the following: 
+
+- No Conditions vs. Diabetes Only: Mean difference = -0.8 g, p = 1.00 (not significant)
+    - No evidence of a meaningful difference in birth weight between mothers with diabetes only and those with no conditions.
+- No Conditions vs. Hypertension Only: Mean difference = -175 g, p < 0.001
+    - Mothers with hypertension only have infants about 175 g lighter on average than mothers with no conditions.
+- No Conditions vs. Both Conditions: Mean difference = -129 g, p = 0.004 
+    - Mothers with both diabetes and hypertension have infants about 129 g lighter on average than mothers with no conditions.
+- Diabetes Only vs. Hypertension Only: Mean difference = -174 g, p = 4.61e-13
+    - Mothers with hypertension only have infants about 174 g lighter on average than mothers with diabetes only.
+- Diabetes Only vs. Both Conditions: Mean difference = -129 g, p = 0.011 
+    - Mothers with both conditions have infants about 129 g lighter on average than mothers with diabetes only.
+- Hypertension Only vs. Both Conditions: Mean difference = 45.3 g, p = 0.673 (not significant)
+    - No evidence of a difference in mean birth weight between hypertension-only and both-conditions groups.
+
+Most comparisons involving the hypertension group show significant lower birth weights; the diabetes-only vs no-conditions comparison is not significant. This demonstrates taht maternal hypertension (alone or combined with diabetes) is associated with significantly lower infant birth weight, while diabetes alone does not differ significantly from no conditions.
