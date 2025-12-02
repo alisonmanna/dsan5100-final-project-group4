@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – DSAN 5100 Final Project</title>
+<title>data_documentation – DSAN 5100 Final Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -100,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Project Report</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -114,7 +114,19 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-documentation" id="toc-data-documentation" class="nav-link active" data-scroll-target="#data-documentation">Data Documentation:</a>
+  <ul class="collapse">
+  <li><a href="#natality-dataset" id="toc-natality-dataset" class="nav-link" data-scroll-target="#natality-dataset">Natality Dataset</a></li>
+  </ul></li>
+  <li><a href="#numeric-columns" id="toc-numeric-columns" class="nav-link" data-scroll-target="#numeric-columns">Numeric Columns:</a></li>
+  <li><a href="#categorical-columns" id="toc-categorical-columns" class="nav-link" data-scroll-target="#categorical-columns">Categorical Columns:</a></li>
+  <li><a href="#boolean-columns" id="toc-boolean-columns" class="nav-link" data-scroll-target="#boolean-columns">Boolean Columns:</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -123,28 +135,105 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">About</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
+<section id="data-documentation" class="level1">
+<h1>Data Documentation:</h1>
+<section id="natality-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="natality-dataset">Natality Dataset</h2>
+</section>
+</section>
+<section id="numeric-columns" class="level1">
+<h1>Numeric Columns:</h1>
+<ul>
+<li><strong>mager</strong>: Mother’s Age (yrs)</li>
+<li><strong>precare</strong>: Month that prenatal care began</li>
+<li><strong>bmi</strong>: Mother’s Pre-Pregnancy BMI</li>
+<li><strong>apgar5</strong>: 5-Minute APGAR score (1-10)</li>
+<li><strong>dplural</strong>: Plurality of birth (2=twins, etc.)</li>
+<li><strong>dbwt</strong>: Birthweight</li>
+</ul>
+</section>
+<section id="categorical-columns" class="level1">
+<h1>Categorical Columns:</h1>
+<ul>
+<li><strong>bfacil</strong>: Birth Facility Type (6 Categories)
+<ul>
+<li>Hospital</li>
+<li>Home (intended)</li>
+<li>Home (not intended)</li>
+<li>Freestanding Birth Center</li>
+<li>Clinic / Doctor’s Office</li>
+<li>Other</li>
+</ul></li>
+<li><strong>mrace6</strong>: Mother’s Race (6 categories)
+<ul>
+<li>White</li>
+<li>Asian</li>
+<li>Black</li>
+<li>American Indian or Alaska Native</li>
+<li>Native Hawaiian and Other Pacific Islander</li>
+<li>More than one race</li>
+</ul></li>
+<li><strong>dmar</strong>: Mother’s Marital Status (Married/Unmarried)</li>
+<li><strong>meduc</strong>: Mother’s Education Level (8 categories)
+<ul>
+<li>8th grade or less</li>
+<li>9th-12th no diploma</li>
+<li>High school graduate or GED completed</li>
+<li>Some college credit</li>
+<li>Associate Degree</li>
+<li>Bachelor’s Degree</li>
+<li>Master’s Degree</li>
+<li>Doctorate</li>
+</ul></li>
+<li><strong>me_rout</strong>: Delivery Routine (4 Categories)
+<ul>
+<li>Spontaneous</li>
+<li>Cesarean</li>
+<li>Vacuum</li>
+<li>Forceps</li>
+</ul></li>
+</ul>
+</section>
+<section id="boolean-columns" class="level1">
+<h1>Boolean Columns:</h1>
+<ul>
+<li><strong>rf_pdiab</strong>: Pre-Pregnancy Diabetes</li>
+<li><strong>rf_gdiab</strong>: Gestastional Diabetes</li>
+<li><strong>rf_phype</strong>: Pre-Pregnancy Hypertension</li>
+<li><strong>rf_ghype</strong>: Gestational Hypertension</li>
+<li><strong>rf_ehype</strong>: Eclampsia</li>
+<li><strong>no_risks</strong>: None of the above risks</li>
+<li><strong>ip_gon</strong>: Gonorrhea Infection during Pregnancy</li>
+<li><strong>ip_syph</strong>: Syphilis Infection during Pregnancy</li>
+<li><strong>ip_chlam</strong>: Chlamydia Infection during Pregnancy</li>
+<li><strong>ip_hepb</strong>: Hepatitis B Infection during Pregnancy</li>
+<li><strong>ip_hepc</strong>: Hepatitis C Infection during Pregnancy</li>
+<li><strong>no_infec</strong>: None of the above infections during Pregnancy</li>
+<li><strong>ld_indl</strong>: Labor was Induced</li>
+<li><strong>ld_augm</strong>: Labor was Augmented</li>
+<li><strong>ld_ster</strong>: Steroids given during Labor</li>
+<li><strong>ld_antb</strong>: Antibiotics given during Labor</li>
+<li><strong>ld_chor</strong>: Chorioamnionitis diagnosed during Labor</li>
+<li><strong>ld_anes</strong>: Anesthesia used during Labor</li>
+<li><strong>mm_mtr</strong>: Maternal Transfusion</li>
+<li><strong>mm_plac</strong>: Placental Abruption</li>
+<li><strong>mm_rupt</strong>: Uterine Rupture</li>
+<li><strong>mm_uhyst</strong>: Unplanned Hysterectomy</li>
+<li><strong>mm_aicu</strong>: Maternal ICU Admission</li>
+<li><strong>ab_aven1</strong>: Assisted Ventilation Required &lt; 6hrs</li>
+<li><strong>ab_aven6</strong>: Assisted Ventilation Required &gt; 6 hrs</li>
+<li><strong>ab_nicu</strong>: Infant Admitted to NICU</li>
+<li><strong>ab_surf</strong>: Surfactant Therapy</li>
+<li><strong>ab_anti</strong>: Antibiotics given to Infant</li>
+<li><strong>ab_seiz</strong>: Seizure Activity in Infant</li>
+<li><strong>no_abnorm</strong>: No Abnormal Conditions in Infant</li>
+</ul>
 
-    
-  
-    
-  </div>
-  
 
-
-</header>
-
-
-<p>About this site</p>
-
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

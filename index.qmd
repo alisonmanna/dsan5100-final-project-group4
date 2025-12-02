@@ -4,25 +4,67 @@ title: "DSAN 5100 Final Project"
 
 # Do Maternal Chronic Health Conditions Affect Pregnancy Outcomes?
 
+[fully explain and describe the problem, why it matters, guiding questions]
+
 This project uses probabilistic modeling and statistical hypothesis testing to investigate whether pre-existing chronic conditions — specifically hypertension and diabetes — impact pregnancy and birth outcomes, such as gestational duration (preterm vs. full-term), delivery method (vaginal vs. cesarean), and neonatal health indicators (birth weight, APGAR scores, NICU admission). This addresses a clinically significant question with clear public health implications.
 
-## Statistical Analyses Ideas
-- Two-sample t-tests (for comparing mean values of two groups to see if difference is significant)
-  - Ideas:
-    - Compare average gestational age between mothers with vs. without hypertension
-    - Compare mean birth weights between diabetic vs. non-diabetic mothers
-- Chi-square Test for independence (if 2 variables are categorical associated or independent)
-  - Ideas:
-    - Test if delivery type (vaginal/cesarean) is independent of diabetes status
-    - Test association between having chronic condition and preterm birth (yes/no)
-- Monte Carlo Simulation 
-  - Generate predicted distributions of birth weights given maternal health conditions
-  - Simulate pregnancy outcomes under different chronic condition prevalence scenarios
+## Data
 
-## Statistical Method Requirements (from course website)
+<div style="display:flex; align-items:center; gap:1rem;">
+  <img src="img/nchs.png" alt="NCHS Logo" style="max-width:45%; height:auto;">
+  <img src="img/nber.png" alt="NBER Logo" style="max-width:45%; height:auto;">
+</div>
+
+This project uses the **Vital Statistics Natality Birth Data** [@NBER_Natality_2024], which uses natality data from the National Vital Statistics System of the National Center for Health Statistics and is distributed by the National Bureau of Economic Research (NBER). The dataset includes demographic data — such as date of birth, age and educational attainment of parents, marital status, live-birth order, race, sex, and geographic area — and health data — including birth weight, gestation, prenatal care, attendant at birth, and Apgar score — for births occurring during the calendar year.
+
+The full dataset contains 237 features across 3,638,436 rows/items. For this project, our data is a random sample of this full dataset of 10,000 rows, subsetted down to 43 features. The features capture the main maternal conditions/risk factors, primary birth outcomes of interest, and selected potential covariates such as mother's race and age.
+
+## Exploratory Data Analysis
+
+Prior to analysis, we clean the data and peform **exploratory data analysis** in Python and R to understand the structure, distributions, and relationships of all of the features of the Natality dataset. The EDA captures in various data visualizations that can be found on the [Exploratory Data Analysis](eda.qmd) page.
+
+## Statistical Methods
+
+We perform various types of **hypothesis testing methods** in R to ____. These analyses can be found on the [Hypothesis Testing](hypothesis_testing.qmd) page.
+
+- t-tests
+- Chi-square tests
+- Bootstrap methods
+- ANOVA
+
+## Time Series Analysis
+
+We also perform time series analysis on two time-varying variables from the supplemental dataset, TBD. For this data, we perfom separate time series exploratory data analysis, fit appropriate ARIMA models to the data, and evaluate the models with model diagnostic techniques. The time series analysis is located in the [Time Series](time_series.qmd) tab.
+
+## Report 
+
+The findings of our analyses culminate in a written report that can be found in the [Report](report.qmd) tab.
+
+
+<br>
+<br>
+
+---
 
 <details>
-  <summary>Requirements (click to expand)</summary>
+  <summary> 
+    <h2>BRAINSTORMING (click to expand, delete later)</h2> 
+  </summary>
+
+  <h3>Statistical Analyses Ideas</h3> 
+  - Two-sample t-tests (for comparing mean values of two groups to see if difference is significant)
+    - Ideas:
+      - Compare average gestational age between mothers with vs. without hypertension
+      - Compare mean birth weights between diabetic vs. non-diabetic mothers
+  - Chi-square Test for independence (if 2 variables are categorical associated or independent)
+    - Ideas:
+      - Test if delivery type (vaginal/cesarean) is independent of diabetes status
+      - Test association between having chronic condition and preterm birth (yes/no)
+  - Monte Carlo Simulation 
+    - Generate predicted distributions of birth weights given maternal health conditions
+    - Simulate pregnancy outcomes under different chronic condition prevalence scenarios
+
+  <h3>Statistical Method Requirements (from course website)</h3> 
 
   - Hypothesis Testing (use each at least once or twice):
     - t-tests
@@ -30,12 +72,10 @@ This project uses probabilistic modeling and statistical hypothesis testing to i
     - Bootstrap methods
     - ANOVA
     - If any assumption is violated (e.g., normality, equal variances), choose the appropriate non-parametric alternative. Make sure to do the relevant tests to see if these assumptions violates.
- 
+
 - Time Series Analysis:
     - You must analyze at least two time-varying variables.
     - Use appropriate time-series modeling techniques (e.g., ARIMA, TS EDA).
     - Model Diagnostics
 
 </details>
-
-## Possible Data Sources
