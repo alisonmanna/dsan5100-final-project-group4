@@ -2,7 +2,7 @@ library(tidyverse)
 library(ggplot2)
 library(dplyr)
 
-df <- read.csv("natality_cleaned.csv")
+df <- read.csv("../data/cleaned/natality_cleaned.csv")
 head(df)
 
 #histograms for numeric columns 
