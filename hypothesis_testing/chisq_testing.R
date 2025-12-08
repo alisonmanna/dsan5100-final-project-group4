@@ -74,3 +74,29 @@ chi_tab6 <- chisq(tab6)
 chi_tab6
 
 chi_tab6$expected
+
+df$chronic_condition <- ifelse(
+  df$rf_pdiab == 1 | df$rf_gdiab == 1 |
+  df$rf_phype == 1 | df$rf_ghype == 1 |
+  df$rf_ehype == 1,
+  1, 0
+)
+
+df$chronic_condition <- factor(
+  df$chronic_condition,
+  levels = c(0, 1),
+  labels = c("No chronic condition", "Chronic condition")
+)
+
+tab_chronic_condition <- table(
+  ChronicCondition = df$chronic_condition,
+  NICU = factor(df$ab_nicu,
+                levels = c(FALSE, TRUE),
+                labels = c("No NICU", "NICU"))
+)
+tab_chronic_condition
+
+chi_tab_chronic_condition <- chisq(tab_chronic_condition)
+chi_tab_chronic_condition
+
+chi_tab_chronic_condition$expected
