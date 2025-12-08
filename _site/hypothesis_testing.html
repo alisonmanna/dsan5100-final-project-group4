@@ -159,16 +159,16 @@ window.Quarto = {
 <span class="menu-text">Exploratory Data Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./report.html"> 
-<span class="menu-text">Project Report</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="./hypothesis_testing.html" aria-current="page"> 
 <span class="menu-text">Hypothesis Testing</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./time_series.html"> 
 <span class="menu-text">Time Series Analysis</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./report.html"> 
+<span class="menu-text">Project Report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
@@ -189,23 +189,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introductionbackground" id="toc-introductionbackground" class="nav-link active" data-scroll-target="#introductionbackground">Introduction/Background</a>
-  <ul class="collapse">
-  <li><a href="#welchs-two-sample-t-test-unequal-variances" id="toc-welchs-two-sample-t-test-unequal-variances" class="nav-link" data-scroll-target="#welchs-two-sample-t-test-unequal-variances">Welch’s two-sample t-Test (unequal variances)</a></li>
-  <li><a href="#chi-squared-test" id="toc-chi-squared-test" class="nav-link" data-scroll-target="#chi-squared-test">Chi-Squared Test</a></li>
-  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap">Bootstrap</a></li>
-  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova">ANOVA</a>
-  <ul class="collapse">
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
-  </ul></li>
-  <li><a href="#assumption-checks" id="toc-assumption-checks" class="nav-link" data-scroll-target="#assumption-checks">Assumption Checks</a>
-  <ul class="collapse">
-  <li><a href="#normality-check" id="toc-normality-check" class="nav-link" data-scroll-target="#normality-check">Normality Check</a></li>
-  <li><a href="#homogeneity-of-variance-check" id="toc-homogeneity-of-variance-check" class="nav-link" data-scroll-target="#homogeneity-of-variance-check">Homogeneity of Variance Check</a></li>
-  </ul></li>
-  <li><a href="#welchs-anova" id="toc-welchs-anova" class="nav-link" data-scroll-target="#welchs-anova">Welch’s ANOVA</a></li>
-  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests">Post-Hoc Tests</a></li>
-  </ul></li>
+  <li><a href="#introductionbackground" id="toc-introductionbackground" class="nav-link active" data-scroll-target="#introductionbackground">Introduction/Background</a></li>
   </ul>
 </nav>
 </nav>
@@ -238,11 +222,14 @@ window.Quarto = {
 <section id="introductionbackground" class="level1">
 <h1>Introduction/Background</h1>
 <p>explain questions we try to answer with the hypothesis tests &amp; how they work</p>
-<section id="welchs-two-sample-t-test-unequal-variances" class="level2">
-<h2 class="anchored" data-anchor-id="welchs-two-sample-t-test-unequal-variances">Welch’s two-sample t-Test (unequal variances)</h2>
-<blockquote class="blockquote">
-<p><em>Question: Do births to mothers with a chronic condition (diabetes or hypertension) have a different mean detailed birth weight (dbwt) than births to mothers without a chronic condition?</em></p>
-</blockquote>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Welch’s two-sample t-Test (unequal variances)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Chi-Squared Test</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Bootstrap</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">ANOVA</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<h2 class="anchored" data-anchor-id="introductionbackground">
+Question: Do births to mothers with a chronic condition (diabetes or hypertension) have a different mean detailed birth weight (dbwt) than births to mothers without a chronic condition?
+</h2>
+<p><br></p>
 <ul>
 <li><strong>Null hypothesis</strong> (<span class="math inline">\(H_0\)</span>): <span class="math inline">\(\mu_{chronic} = \mu_{nonchronic}\)</span> — the mean birth weight is the same for the chronic and non‑chronic groups.</li>
 <li><strong>Alternative hypothesis</strong> (<span class="math inline">\(H_1\)</span>): <span class="math inline">\(\mu_{chronic} \neq \mu_{nonchronic}\)</span> — the mean birth weight differs between the two groups.</li>
@@ -300,18 +287,989 @@ mean of x mean of y
 </div>
 </div>
 <p>[interpretation]</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<h2 class="anchored">
+Question: Are different chronic conditions independent of admission to NICU?
+</h2>
+<p><br></p>
+<ul>
+<li><strong>Null hypothesis</strong> (<span class="math inline">\(H_0\)</span>): The chronic condition (e.g., diabetes or hypertension) and NICU admission are independent.</li>
+<li><strong>Alternative hypothesis</strong> (<span class="math inline">\(H_1\)</span>): The chronic condition and NICU admission are not independent (i.e., there is an association between them).</li>
+</ul>
+<p><br></p>
+<section id="dataset" class="level3">
+<h3 class="anchored" data-anchor-id="dataset">Dataset</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/cleaned/natality_cleaned.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(df), <span class="at">caption =</span> <span class="st">"Natality Dataset"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Natality Dataset</caption>
+<colgroup>
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 2%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">bfacil</th>
+<th style="text-align: right;">mager</th>
+<th style="text-align: left;">mrace6</th>
+<th style="text-align: left;">dmar</th>
+<th style="text-align: left;">meduc</th>
+<th style="text-align: right;">precare</th>
+<th style="text-align: right;">bmi</th>
+<th style="text-align: left;">rf_pdiab</th>
+<th style="text-align: left;">rf_gdiab</th>
+<th style="text-align: left;">rf_phype</th>
+<th style="text-align: left;">rf_ghype</th>
+<th style="text-align: left;">rf_ehype</th>
+<th style="text-align: left;">no_risks</th>
+<th style="text-align: left;">ip_gon</th>
+<th style="text-align: left;">ip_syph</th>
+<th style="text-align: left;">ip_chlam</th>
+<th style="text-align: left;">ip_hepb</th>
+<th style="text-align: left;">ip_hepc</th>
+<th style="text-align: left;">no_infec</th>
+<th style="text-align: left;">ld_indl</th>
+<th style="text-align: left;">ld_augm</th>
+<th style="text-align: left;">ld_ster</th>
+<th style="text-align: left;">ld_antb</th>
+<th style="text-align: left;">ld_chor</th>
+<th style="text-align: left;">ld_anes</th>
+<th style="text-align: left;">me_rout</th>
+<th style="text-align: left;">mm_mtr</th>
+<th style="text-align: left;">mm_plac</th>
+<th style="text-align: left;">mm_rupt</th>
+<th style="text-align: left;">mm_uhyst</th>
+<th style="text-align: left;">mm_aicu</th>
+<th style="text-align: right;">apgar5</th>
+<th style="text-align: right;">dplural</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">combgest</th>
+<th style="text-align: right;">dbwt</th>
+<th style="text-align: left;">ab_aven1</th>
+<th style="text-align: left;">ab_aven6</th>
+<th style="text-align: left;">ab_nicu</th>
+<th style="text-align: left;">ab_surf</th>
+<th style="text-align: left;">ab_anti</th>
+<th style="text-align: left;">ab_seiz</th>
+<th style="text-align: left;">no_abnorm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hospital</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Unmarried</td>
+<td style="text-align: left;">Some college credit, not a degree</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">24.2</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">Spontaneous</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">3150</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hospital</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Unmarried</td>
+<td style="text-align: left;">Some college credit, not a degree</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">20.4</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">Spontaneous</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">2466</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hospital</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">Asian</td>
+<td style="text-align: left;">Married</td>
+<td style="text-align: left;">Doctorate</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">19.5</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">Cesarean</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">2620</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hospital</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Married</td>
+<td style="text-align: left;">9th-12th no diploma</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">33.4</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">Spontaneous</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">3360</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Married</td>
+<td style="text-align: left;">Some college credit, not a degree</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">23.0</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">Spontaneous</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">2930</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hospital</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">Black</td>
+<td style="text-align: left;">Unmarried</td>
+<td style="text-align: left;">Bachelor’s degree</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">20.6</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">Cesarean</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">3572</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br></p>
 </section>
-<section id="chi-squared-test" class="level2">
-<h2 class="anchored" data-anchor-id="chi-squared-test">Chi-Squared Test</h2>
+<section id="chi-squared-tests-using-rs-chisq" class="level3">
+<h3 class="anchored" data-anchor-id="chi-squared-tests-using-rs-chisq">Chi-Squared Tests, using R’s <code>chisq()</code></h3>
 </section>
-<section id="bootstrap" class="level2">
-<h2 class="anchored" data-anchor-id="bootstrap">Bootstrap</h2>
+<section id="pre-existing-diabetes" class="level3">
+<h3 class="anchored" data-anchor-id="pre-existing-diabetes">Pre-existing Diabetes</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>chisq <span class="ot">&lt;-</span> <span class="cf">function</span>(A){</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">chisq.test</span>(A)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pre exsting diabetes</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>rf_pdiab, df<span class="sc">$</span>ab_nicu, <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"Pre-existing Diabetes"</span>, <span class="st">"NICU Admission"</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># tab1</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tab1, <span class="at">caption =</span> <span class="st">"Observed Counts of Pre-existing Diabetes vs. NICU Admission"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"No NICU Admission"</span>, <span class="st">"NICU Admission"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Observed Counts of Pre-existing Diabetes vs.&nbsp;NICU Admission</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">No NICU Admission</th>
+<th style="text-align: right;">NICU Admission</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9141</td>
+<td style="text-align: right;">740</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">35</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>chi_tab1 <span class="ot">&lt;-</span> <span class="fu">chisq</span>(tab1)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>chi_tab1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  A
+X-squared = 76.007, df = 1, p-value &lt; 2.2e-16</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chi_tab1$expected</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(chi_tab1<span class="sc">$</span>expected, <span class="at">caption =</span> <span class="st">"Expected Counts Under Independence (Pre-existing Diabetes vs. NICU Admission)"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"No NICU Admission"</span>, <span class="st">"NICU Admission"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Expected Counts Under Independence (Pre-existing Diabetes vs.&nbsp;NICU Admission)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">No NICU Admission</th>
+<th style="text-align: right;">NICU Admission</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9115.2225</td>
+<td style="text-align: right;">765.7775</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">109.7775</td>
+<td style="text-align: right;">9.2225</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br></p>
 </section>
-<section id="anova" class="level2">
-<h2 class="anchored" data-anchor-id="anova">ANOVA</h2>
-<blockquote class="blockquote">
-<p><em>Question: Does the presence of maternal chronic conditions (diabetes and/or hypertension) significantly affect birth weight?</em></p>
-</blockquote>
+<section id="gestational-diabetes" class="level3">
+<h3 class="anchored" data-anchor-id="gestational-diabetes">Gestational Diabetes</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gestational diabetes</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tab2 <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>rf_gdiab, df<span class="sc">$</span>ab_nicu, <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"Gestational Diabetes"</span>, <span class="st">"NICU Admission"</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tab2</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tab2, <span class="at">caption =</span> <span class="st">"Observed Counts of Gestational Diabetes vs. NICU Admission"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"No NICU Admission"</span>, <span class="st">"NICU Admission"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Observed Counts of Gestational Diabetes vs.&nbsp;NICU Admission</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">No NICU Admission</th>
+<th style="text-align: right;">NICU Admission</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">8494</td>
+<td style="text-align: right;">694</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">731</td>
+<td style="text-align: right;">81</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>chi_tab2 <span class="ot">&lt;-</span> <span class="fu">chisq</span>(tab2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>chi_tab2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  A
+X-squared = 5.7876, df = 1, p-value = 0.01614</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chi_tab2$expected</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(chi_tab2<span class="sc">$</span>expected, <span class="at">caption =</span> <span class="st">"Expected Counts Under Independence (Gestational Diabetes vs. NICU Admission)"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"No NICU Admission"</span>, <span class="st">"NICU Admission"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Expected Counts Under Independence (Gestational Diabetes vs.&nbsp;NICU Admission)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">No NICU Admission</th>
+<th style="text-align: right;">NICU Admission</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">8475.93</td>
+<td style="text-align: right;">712.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">749.07</td>
+<td style="text-align: right;">62.93</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="pre-pregnancy-hypertension" class="level3">
+<h3 class="anchored" data-anchor-id="pre-pregnancy-hypertension">Pre-pregnancy Hypertension</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pre-pregnancy hypertension</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>tab3 <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>rf_phype, df<span class="sc">$</span>ab_nicu, <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"Pre-Pregnancy Hypertension"</span>, <span class="st">"NICU Admission"</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tab3</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tab3, <span class="at">caption =</span> <span class="st">"Observed Counts of Pre-pregnancy Hypertension vs. NICU Admission"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"No NICU Admission"</span>, <span class="st">"NICU Admission"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Observed Counts of Pre-pregnancy Hypertension vs.&nbsp;NICU Admission</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">No NICU Admission</th>
+<th style="text-align: right;">NICU Admission</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">8945</td>
+<td style="text-align: right;">733</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">280</td>
+<td style="text-align: right;">42</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>chi_tab3 <span class="ot">&lt;-</span> <span class="fu">chisq</span>(tab3)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>chi_tab3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  A
+X-squared = 12.286, df = 1, p-value = 0.0004563</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chi_tab3$expected</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(chi_tab3<span class="sc">$</span>expected, <span class="at">caption =</span> <span class="st">"Expected Counts Under Independence (Pre-Pregnancy Hypertension vs. NICU Admission)"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"No NICU Admission"</span>, <span class="st">"NICU Admission"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Expected Counts Under Independence (Pre-Pregnancy Hypertension vs.&nbsp;NICU Admission)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">No NICU Admission</th>
+<th style="text-align: right;">NICU Admission</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">8927.955</td>
+<td style="text-align: right;">750.045</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">297.045</td>
+<td style="text-align: right;">24.955</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="gestational-hypertension" class="level3">
+<h3 class="anchored" data-anchor-id="gestational-hypertension">Gestational Hypertension</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gestational hypertension</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>tab4 <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>rf_ghype, df<span class="sc">$</span>ab_nicu, <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"Gestational Hypertension"</span>, <span class="st">"NICU Admission"</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tab4</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tab4, <span class="at">caption =</span> <span class="st">"Observed Counts of Gestational Hypertension vs. NICU Admission"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"No NICU Admission"</span>, <span class="st">"NICU Admission"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Observed Counts of Gestational Hypertension vs.&nbsp;NICU Admission</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">No NICU Admission</th>
+<th style="text-align: right;">NICU Admission</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">8396</td>
+<td style="text-align: right;">658</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">829</td>
+<td style="text-align: right;">117</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>chi_tab4 <span class="ot">&lt;-</span> <span class="fu">chisq</span>(tab4)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>chi_tab4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  A
+X-squared = 30.456, df = 1, p-value = 3.416e-08</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chi_tab4$expected</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(chi_tab4<span class="sc">$</span>expected, <span class="at">caption =</span> <span class="st">"Expected Counts Under Independence (Gestational Hypertension vs. NICU Admission)"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"No NICU Admission"</span>, <span class="st">"NICU Admission"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Expected Counts Under Independence (Gestational Hypertension vs.&nbsp;NICU Admission)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">No NICU Admission</th>
+<th style="text-align: right;">NICU Admission</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">8352.315</td>
+<td style="text-align: right;">701.685</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">872.685</td>
+<td style="text-align: right;">73.315</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<h2 class="anchored">
+Question: Can we use bootstrap resampling to estimate the sampling distribution and confidence intervals for the mean birth weight in chronic vs.&nbsp;non-chronic condition groups, and assess the robustness of the observed mean difference?
+</h2>
+<p><br></p>
+<section id="data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation">Data Preparation</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/cleaned/natality_cleaned.csv"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Detailed birth weight </span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">&lt;-</span> <span class="st">"dbwt"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating chronic condition flag based on columns (true = chronic)</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>chronic_condition <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>rf_pdiab <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> df<span class="sc">$</span>rf_gdiab <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>rf_phype <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> df<span class="sc">$</span>rf_ghype <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>rf_ehype <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="dv">0</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Splitting into chronic vs non-chronic groups </span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>group_chronic <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(chronic_condition <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(outcome)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>group_nonchronic <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(chronic_condition <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(outcome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><br></p>
+</section>
+<section id="original-data-histograms" class="level3">
+<h3 class="anchored" data-anchor-id="original-data-histograms">Original Data Histograms</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== PART 1: Original Data Histograms with Normal Overlay =====</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Save figure to file</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"plots/original_data_histograms.png"</span>, <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="dv">600</span>, <span class="at">res =</span> <span class="dv">100</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for chronic group with normal overlay</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(group_chronic, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Birth Weight - Chronic Conditions"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Birth Weight (grams)"</span>, </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"coral"</span>, <span class="at">border =</span> <span class="st">"white"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add normal curve overlay</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>mean_chronic <span class="ot">&lt;-</span> <span class="fu">mean</span>(group_chronic, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>sd_chronic <span class="ot">&lt;-</span> <span class="fu">sd</span>(group_chronic, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> mean_chronic, <span class="at">sd =</span> sd_chronic), </span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"darkred"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="st">"Normal Dist"</span>, <span class="at">col =</span> <span class="st">"darkred"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for non-chronic group with normal overlay</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(group_nonchronic, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Birth Weight - No Chronic Conditions"</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Birth Weight (grams)"</span>, </span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">border =</span> <span class="st">"white"</span>)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Add normal curve overlay</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>mean_nonchronic <span class="ot">&lt;-</span> <span class="fu">mean</span>(group_nonchronic, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>sd_nonchronic <span class="ot">&lt;-</span> <span class="fu">sd</span>(group_nonchronic, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> mean_nonchronic, <span class="at">sd =</span> sd_nonchronic), </span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="st">"Normal Dist"</span>, <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()  <span class="co"># Close the saved figure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>quartz_off_screen 
+                2 </code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plots/original_data_histograms.png" class="img-fluid figure-img"></p>
+<figcaption>Original Data Histogram</figcaption>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="bootstrap-sampling-distribution-histograms" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap-sampling-distribution-histograms">Bootstrap Sampling &amp; Distribution Histograms</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== PART 2: Bootstrap Sampling =====</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5100</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap for chronic group</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>boot_mean_chronic <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>n_chronic <span class="ot">&lt;-</span> <span class="fu">length</span>(group_chronic)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  boot_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(group_chronic, n_chronic, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  boot_mean_chronic[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(boot_sample)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap for non-chronic group</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>boot_mean_nonchronic <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>n_nonchronic <span class="ot">&lt;-</span> <span class="fu">length</span>(group_nonchronic)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  boot_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(group_nonchronic, n_nonchronic, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  boot_mean_nonchronic[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(boot_sample)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== PART 3: Bootstrap Distribution Histograms with Normal Overlay =====</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Save figure to file</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"plots/bootstrap_distributions.png"</span>, <span class="at">width =</span> <span class="dv">1200</span>, <span class="at">height =</span> <span class="dv">600</span>, <span class="at">res =</span> <span class="dv">100</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for bootstrap chronic distribution with normal overlay</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot_mean_chronic, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Bootstrap Dist - Chronic Mean Birth Weight"</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Mean Birth Weight (grams)"</span>, </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"coral"</span>, <span class="at">border =</span> <span class="st">"white"</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add normal curve overlay</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>boot_mean_chronic_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(boot_mean_chronic)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>boot_mean_chronic_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_mean_chronic)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> boot_mean_chronic_mean, <span class="at">sd =</span> boot_mean_chronic_sd), </span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"darkred"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="st">"Normal Dist"</span>, <span class="at">col =</span> <span class="st">"darkred"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram for bootstrap non-chronic distribution with normal overlay</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot_mean_nonchronic, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Bootstrap Dist - Non-Chronic Mean Birth Weight"</span>,</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Mean Birth Weight (grams)"</span>, </span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">border =</span> <span class="st">"white"</span>)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Add normal curve overlay</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>boot_mean_nonchronic_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(boot_mean_nonchronic)</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>boot_mean_nonchronic_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_mean_nonchronic)</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> boot_mean_nonchronic_mean, <span class="at">sd =</span> boot_mean_nonchronic_sd), </span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="st">"Normal Dist"</span>, <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()  <span class="co"># Close the saved figure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>quartz_off_screen 
+                2 </code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plots/bootstrap_distributions.png" class="img-fluid figure-img"></p>
+<figcaption>Bootstrap Histogram</figcaption>
+</figure>
+</div>
+<p><br></p>
+</section>
+<section id="t-tests" class="level3">
+<h3 class="anchored" data-anchor-id="t-tests">T-Tests</h3>
+<section id="original-t-test" class="level4">
+<h4 class="anchored" data-anchor-id="original-t-test">Original T-Test</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== PART 4: T-Tests =====</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Original t-test</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cat("\n===== ORIGINAL T-</span><span class="al">TEST</span><span class="co"> =====\n")</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>t_test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(group_chronic, group_nonchronic)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t_test_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  group_chronic and group_nonchronic
+t = -8.6312, df = 2928.5, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -132.09633  -83.18935
+sample estimates:
+mean of x mean of y 
+ 3202.622  3310.265 </code></pre>
+</div>
+</div>
+</section>
+<section id="bootstrap-t-test" class="level4">
+<h4 class="anchored" data-anchor-id="bootstrap-t-test">Bootstrap T-Test</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap t-test (comparing bootstrap distributions)</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cat("\n\n===== BOOTSTRAP T-</span><span class="al">TEST</span><span class="co"> =====\n")</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>boot_t_test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(boot_mean_chronic, boot_mean_nonchronic)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(boot_t_test_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  boot_mean_chronic and boot_mean_nonchronic
+t = -861.4, df = 14306, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -107.8369 -107.3472
+sample estimates:
+mean of x mean of y 
+ 3202.628  3310.221 </code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cat("\n\n===== SUMMARY STATISTICS =====\n")</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Original Data:</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Original Data:</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"  Chronic group: Mean = %.2f, SD = %.2f, n = %d</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>            mean_chronic, sd_chronic, n_chronic))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Chronic group: Mean = 3202.62, SD = 504.89, n = 1997</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"  Non-chronic group: Mean = %.2f, SD = %.2f, n = %d</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>            mean_nonchronic, sd_nonchronic, n_nonchronic))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Non-chronic group: Mean = 3310.27, SD = 472.42, n = 8003</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Bootstrap Distributions:</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Bootstrap Distributions:</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"  Chronic bootstrap: Mean = %.2f, SD = %.2f</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>            boot_mean_chronic_mean, boot_mean_chronic_sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Chronic bootstrap: Mean = 3202.63, SD = 11.28</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"  Non-chronic bootstrap: Mean = %.2f, SD = %.2f</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>            boot_mean_nonchronic_mean, boot_mean_nonchronic_sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Non-chronic bootstrap: Mean = 3310.22, SD = 5.37</code></pre>
+</div>
+</div>
+</section>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<h2 class="anchored">
+Question: Does the presence of maternal chronic conditions (diabetes and/or hypertension) significantly affect birth weight?
+</h2>
+<p><br></p>
 <ul>
 <li><strong>Null hypothesis</strong> (<span class="math inline">\(H_0\)</span>): The mean birth weight is equal across all four condition groups.</li>
 </ul>
@@ -321,45 +1279,46 @@ mean of x mean of y
 </ul>
 <p><span class="math display">\[H_a: \text{At least one } \mu_i \text{ is different}\]</span></p>
 <p>Significance level: <span class="math inline">\(\alpha = 0.05\)</span></p>
-<section id="data-preparation" class="level3">
-<h3 class="anchored" data-anchor-id="data-preparation">Data Preparation</h3>
+<p><br></p>
+<section id="data-preparation-1" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation-1">Data Preparation</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Click to see code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load data</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>births <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/cleaned/natality_cleaned.csv"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># head(births)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load data</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>births <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/cleaned/natality_cleaned.csv"</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># head(births)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Click to see code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create condition groups for analysis</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>births_clean <span class="ot">&lt;-</span> births <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># CBinary indicators for any diabetes</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">has_diabetes =</span> <span class="fu">ifelse</span>(rf_pdiab <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">|</span> rf_gdiab <span class="sc">==</span> <span class="cn">TRUE</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Binary indicator for any hypertension</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">has_hypertension =</span> <span class="fu">ifelse</span>(rf_phype <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">|</span> rf_ghype <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">|</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                              rf_ehype <span class="sc">==</span> <span class="cn">TRUE</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create 4 condition groups</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition_group =</span> <span class="fu">case_when</span>(</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      has_diabetes <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> has_hypertension <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"No Conditions"</span>,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      has_diabetes <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> has_hypertension <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Diabetes Only"</span>,</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      has_diabetes <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> has_hypertension <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Hypertension Only"</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      has_diabetes <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> has_hypertension <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Both Conditions"</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert to factor w/ ordered levels</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition_group =</span> <span class="fu">factor</span>(condition_group, </span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"No Conditions"</span>, <span class="st">"Diabetes Only"</span>, </span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">"Hypertension Only"</span>, <span class="st">"Both Conditions"</span>))</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Check sample sizes</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(births_clean<span class="sc">$</span>condition_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create condition groups for analysis</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>births_clean <span class="ot">&lt;-</span> births <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># CBinary indicators for any diabetes</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">has_diabetes =</span> <span class="fu">ifelse</span>(rf_pdiab <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">|</span> rf_gdiab <span class="sc">==</span> <span class="cn">TRUE</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Binary indicator for any hypertension</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">has_hypertension =</span> <span class="fu">ifelse</span>(rf_phype <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">|</span> rf_ghype <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">|</span> </span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>                              rf_ehype <span class="sc">==</span> <span class="cn">TRUE</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create 4 condition groups</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>      has_diabetes <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> has_hypertension <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"No Conditions"</span>,</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>      has_diabetes <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> has_hypertension <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Diabetes Only"</span>,</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>      has_diabetes <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> has_hypertension <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Hypertension Only"</span>,</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>      has_diabetes <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> has_hypertension <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Both Conditions"</span></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert to factor w/ ordered levels</span></span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition_group =</span> <span class="fu">factor</span>(condition_group, </span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"No Conditions"</span>, <span class="st">"Diabetes Only"</span>, </span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">"Hypertension Only"</span>, <span class="st">"Both Conditions"</span>))</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Check sample sizes</span></span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(births_clean<span class="sc">$</span>condition_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -367,51 +1326,54 @@ mean of x mean of y
              8003               713              1066               218 </code></pre>
 </div>
 </div>
+<p><br></p>
 </section>
-</section>
-<section id="assumption-checks" class="level2">
-<h2 class="anchored" data-anchor-id="assumption-checks">Assumption Checks</h2>
+<section id="assumption-checks" class="level3">
+<h3 class="anchored" data-anchor-id="assumption-checks">Assumption Checks</h3>
 <p>One-way ANOVA requires three key assumptions:</p>
 <ul>
 <li>Independence: Each observation is independent (already satisfied because each birth represents a separate individual)</li>
 <li>Normality: Birth weights within each group are approximately normally distributed</li>
 <li>Homogeneity of variance: All groups have equal variances</li>
 </ul>
+<p><br></p>
+</section>
 <section id="normality-check" class="level3">
 <h3 class="anchored" data-anchor-id="normality-check">Normality Check</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Click to see code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Q-Q plots for each group</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(group <span class="cf">in</span> <span class="fu">levels</span>(births_clean<span class="sc">$</span>condition_group)) {</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  data_subset <span class="ot">&lt;-</span> births_clean<span class="sc">$</span>dbwt[births_clean<span class="sc">$</span>condition_group <span class="sc">==</span> group]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qqnorm</span>(data_subset, <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Q-Q Plot:"</span>, group))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qqline</span>(data_subset, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Q-Q plots for each group</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(group <span class="cf">in</span> <span class="fu">levels</span>(births_clean<span class="sc">$</span>condition_group)) {</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  data_subset <span class="ot">&lt;-</span> births_clean<span class="sc">$</span>dbwt[births_clean<span class="sc">$</span>condition_group <span class="sc">==</span> group]</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qqnorm</span>(data_subset, <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Q-Q Plot:"</span>, group))</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qqline</span>(data_subset, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hypothesis_testing_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="hypothesis_testing_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Click to see code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The Q-Q plots show that birth weights generally follow a normal distribution for all groups, with most points falling along the diagonal line.</p>
+<p><br></p>
 </section>
 <section id="homogeneity-of-variance-check" class="level3">
 <h3 class="anchored" data-anchor-id="homogeneity-of-variance-check">Homogeneity of Variance Check</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Click to see code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene's test</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>levene_result <span class="ot">&lt;-</span> <span class="fu">leveneTest</span>(dbwt <span class="sc">~</span> condition_group, <span class="at">data =</span> births_clean)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(levene_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene's test</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>levene_result <span class="ot">&lt;-</span> <span class="fu">leveneTest</span>(dbwt <span class="sc">~</span> condition_group, <span class="at">data =</span> births_clean)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(levene_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = median)
@@ -423,15 +1385,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>The Levene’s test null hypothesis is that the groups have equal variances. Since F = 5.4543 and p = 0.0009611 (p &lt; 0.001), we reject the null and conclude that there is strong evidence that variances differ across the groups. The homogeneity of variance assumption is violated, so we will use <strong>Welch’s ANOVA</strong>, which is more robust to violations of the equal variance assumption.</p>
+<p><br></p>
 </section>
-</section>
-<section id="welchs-anova" class="level2">
-<h2 class="anchored" data-anchor-id="welchs-anova">Welch’s ANOVA</h2>
+<section id="welchs-anova" class="level3">
+<h3 class="anchored" data-anchor-id="welchs-anova">Welch’s ANOVA</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Click to see code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>welch_result <span class="ot">&lt;-</span> <span class="fu">oneway.test</span>(dbwt <span class="sc">~</span> condition_group, <span class="at">data =</span> births_clean, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(welch_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>welch_result <span class="ot">&lt;-</span> <span class="fu">oneway.test</span>(dbwt <span class="sc">~</span> condition_group, <span class="at">data =</span> births_clean, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(welch_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -442,15 +1404,16 @@ F = 41.96, num df = 3.00, denom df = 776.26, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Welch’s ANOVA shows a highly significant difference in mean birth weight across the conditions levels (F = 41.96, num df = 3, denom df = 776.26, p &lt; 2.2e-16). Therefore, we reject H0 and have enough evidence to conclude that not all group means are equal.</p>
+<p><br></p>
 </section>
-<section id="post-hoc-tests" class="level2">
-<h2 class="anchored" data-anchor-id="post-hoc-tests">Post-Hoc Tests</h2>
+<section id="post-hoc-tests" class="level3">
+<h3 class="anchored" data-anchor-id="post-hoc-tests">Post-Hoc Tests</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Click to see code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use Games-Howell bc robust to unequal variances</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>games_howell <span class="ot">&lt;-</span> births_clean <span class="sc">|&gt;</span> <span class="fu">games_howell_test</span>(dbwt <span class="sc">~</span> condition_group)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(games_howell)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use Games-Howell bc robust to unequal variances</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>games_howell <span class="ot">&lt;-</span> births_clean <span class="sc">|&gt;</span> <span class="fu">games_howell_test</span>(dbwt <span class="sc">~</span> condition_group)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(games_howell)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
@@ -464,6 +1427,7 @@ F = 41.96, num df = 3.00, denom df = 776.26, p-value &lt; 2.2e-16</code></pre>
 6 dbwt  Hypertension O… Both …   45.3      -58.5     149.  6.73e- 1 ns          </code></pre>
 </div>
 </div>
+<p><br></p>
 <p>The post-hoc test showed the following:</p>
 <ul>
 <li>No Conditions vs.&nbsp;Diabetes Only: Mean difference = -0.8 g, p = 1.00 (not significant)
@@ -492,9 +1456,12 @@ F = 41.96, num df = 3.00, denom df = 776.26, p-value &lt; 2.2e-16</code></pre>
 </ul></li>
 </ul>
 <p>Most comparisons involving the hypertension group show significant lower birth weights; the diabetes-only vs no-conditions comparison is not significant. This demonstrates taht maternal hypertension (alone or combined with diabetes) is associated with significantly lower infant birth weight, while diabetes alone does not differ significantly from no conditions.</p>
-
-
 </section>
+</div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
