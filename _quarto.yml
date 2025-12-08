@@ -12,12 +12,12 @@ website:
         text: Home
       - href: eda.qmd
         text: Exploratory Data Analysis
-      - href: report.qmd
-        text: Project Report
       - href: hypothesis_testing.qmd
         text: Hypothesis Testing
       - href: time_series.qmd
         text: Time Series Analysis
+      - href: report.qmd
+        text: Project Report
       - about.qmd
 
 format:

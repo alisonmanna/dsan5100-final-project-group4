@@ -2,8 +2,15 @@
 title: "Time Series Analysis"
 ---
 
-## The Data: Mortality from Maternal Hypertensive Disorders
-Link: https://vizhub.healthdata.org/gbd-results/, accessed via https://ourworldindata.org/maternal-mortality
+## Mortality from Maternal Hypertensive Disorders (IHME)
+
+The World Health Organization (WHO) estimates that around 300,000 women globally died from pregnancy-related deaths in 2017, which is around 800 each day on average.
+
+According to the ICD-11, maternal deaths are defined as the deaths of women while pregnant or within 42 days of termination of pregnancy, from pregnancy-related causes, but excluding accidental or incidental causes of death.
+
+Here, we perform a time series analysis of data collected from the Institute for Health Metrics and Evaluation [-@GBD2024] ([link](https://vizhub.healthdata.org/gbd-results/, accessed via https://ourworldindata.org/maternal-mortality)) on the proportion of maternal deaths — defined as deaths from pregnancy-related causes of women while pregnant or within 42 days of termination of pregnancy, not including accidental or incidental causes — from maternal conditions caused by hypertensive disorders, such as gestational hypertension and preeclampsia. The data was originally sourced from the [Our World In Data Maternal Mortality Report](https://ourworldindata.org/maternal-mortality), which tracks maternal deaths and their causes and prevalence around the globe. 
+
+The below time series analysis uses annual data collected between 1980 and 2023 and aims to fit an ARIMA (Autoregressive Integrated Moving Average) model to the data in order to understand the underlying autocorrelation in the data and use these temporal dynamics to accurately forecast the future of maternal mortality due to hypertension.
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE}
 library(tidyverse)
@@ -28,7 +35,7 @@ library(patchwork)
 library(kableExtra)
 ```
 
-```{r, include=FALSE}
+```{r, warning=FALSE, message=FALSE}
 # Read in data
 ihme <- read.csv("time_series/data/IHME-2023.csv")
 # select relevant columns, order by year
@@ -87,7 +94,7 @@ ihme_ts <- ts(ihme$mortality, start = 1980, frequency = 1)
 ```
 
 `decomposed = decompose(ihme_ts)`
-
+<br>
 `autoplot(decomposed)`
 
 Since we can't decompose annual data, we perform a moving average calculation to extract the trend component.
@@ -97,14 +104,14 @@ Since we can't decompose annual data, we perform a moving average calculation to
 trend_mortality <- ma(ihme_ts, order = 6, centre = TRUE)
 
 plot_ly(x = ~time(ihme_ts)) |>
-  add_lines(y = ~as.numeric(ihme_ts), name = "Original") |>
-  add_lines(y = ~as.numeric(trend_mortality), name = "Trend (MA)", line = list(dash = "dash")) |>
-  layout(
-    title = "Maternal Mortality: Original vs Trend", 
-    xaxis = list(title = "Year"), 
-    yaxis = list(title = "Mortality Ratio"),
-    plot_bgcolor = '#F7F1DE',
-    paper_bgcolor = '#F7F1DE')
+    add_lines(y = ~as.numeric(ihme_ts), name = "Original", line = list(color = "#A8BBA3")) |>
+    add_lines(y = ~as.numeric(trend_mortality), name = "Trend (MA)", line = list(color = "#B87C4C", dash = "dash")) |>
+    layout(
+        title = "Maternal Mortality: Original vs Trend", 
+        xaxis = list(title = "Year"), 
+        yaxis = list(title = "Mortality Ratio"),
+        plot_bgcolor = '#F7F1DE',
+        paper_bgcolor = '#F7F1DE')
 ```
 
 The moving average calculation produces a smoother line without the randomness of the original series, showing the increasing trend of the data more clearly.
@@ -150,26 +157,25 @@ The results from an ADF test alone can at times be unreliable, but this result *
 
 ```{r}
 diff_ihme <- diff(ihme_ts)
-
 # Plot original vs. differenced
 acf_plot_1 <- ggAcf(ihme_ts, 40) +
-  ggtitle("ACF of Original Series") +
-  theme_minimal()  + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+    ggtitle("ACF of Original Series") +
+    theme_minimal()  + 
+    theme(
+        plot.background = element_rect(fill = '#F7F1DE', color = NA),
+        panel.background = element_rect(fill = '#F7F1DE', color = NA)
+    )
 
 acf_plot_2 <- ggAcf(diff_ihme, 40) +
-  ggtitle("ACF of Differenced Series") +
-  theme_minimal() + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+    ggtitle("ACF of Differenced Series") +
+    theme_minimal() + 
+    theme(
+        plot.background = element_rect(fill = '#F7F1DE', color = NA),
+        panel.background = element_rect(fill = '#F7F1DE', color = NA)
+    )
 
-# Display both ACF plots side by side
-acf_plot_1 / acf_plot_2
+# Display plots side by side w/patchwork
+(acf_plot_1 / acf_plot_2) & plot_annotation(theme = theme(plot.margin = margin(0, 0, 0, 0)))
 ```
 
 As evident in the ACF plots of the original and first-differenced data above, first-order differencing significantly reduces the autocorrelation across all lags. Therefore, first-order differencing is necessary for this data. First-order is sufficient and the data does not need second-order differencing.
@@ -188,7 +194,7 @@ diff_log_ihme <- diff(log_ihme_ts)
 
 # Plots for differenced data
 p1 <- ggplot() +
-  geom_line(aes(x = time(diff_ihme), y = diff_ihme), size = 0.9, color = "blue") +
+  geom_line(aes(x = time(diff_ihme), y = diff_ihme), size = 0.9, color = "#B87C4C") +
   labs(title = "Differenced Mortality",
        x = "Time",
        y = "Differenced Mortality Ratio") +
@@ -199,7 +205,7 @@ p1 <- ggplot() +
   )
 
 p2 <- ggplot() +
-  geom_line(aes(x = time(diff_log_ihme), y = diff_log_ihme), size = 0.9, color = "red") +
+  geom_line(aes(x = time(diff_log_ihme), y = diff_log_ihme), size = 0.9, color = "#51361f") +
   labs(title = "Differenced Log-Transformed Mortality",
        x = "Time",
        y = "Differenced Log Mortality Ratio") +
@@ -210,7 +216,7 @@ p2 <- ggplot() +
   )
 
 # Combine plots
-p1 / p2
+(p1 / p2) & plot_annotation(theme = theme(plot.margin = margin(0, 0, 0, 0)))
 ```
 
 The original series did not visually show extreme skew, outliers, or multiplicative relationship, but we performed a log-transformation anyway to confirm. The results of this above confirm that a log transformation is not necessary for this data.
