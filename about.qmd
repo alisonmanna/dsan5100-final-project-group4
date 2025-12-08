@@ -2,4 +2,32 @@
 title: "About"
 ---
 
-About this site
+## Katie DiPaolo
+
+<img style="float: left; margin-right: 20px; margin-bottom: 20px;" src="./img/profile.png" alt="Katie DiPaolo" width="200" height="235">
+
+Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+
+<br>
+
+## Alison Manna
+
+<img style="float: left; margin-right: 20px; margin-bottom: 20px;" src="./img/profile.png" alt="Alison Manna" width="200" height="235">
+
+Alison is a second‑year Master's student in Data Science and Analytics at Georgetown University. Originally from New York, she holds a BA in linguistics from Georgetown and has prior experience in finance and commercial real estate. She is interested in applying her computational and statistical skills in business settings and industries at the emerging stage of data and AI adoption to support business decisions using the latest innovations in data science.
+
+<br>
+
+## Akshay Arun
+
+<img style="float: left; margin-right: 20px; margin-bottom: 20px;" src="./img/profile.png" alt="Akshay Arun" width="200" height="235">
+
+Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+
+<br>
+
+## Alexa Nakanishi
+
+<img style="float: left; margin-right: 20px; margin-bottom: 20px;" src="./img/profile.png" alt="Alexa Nakanishi" width="200" height="235">
+
+Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.

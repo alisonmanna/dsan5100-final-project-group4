@@ -1,5 +1,8 @@
 project:
   type: website
+  render:
+        - "*.qmd"  # render all other .qmd files
+        - "!time_series_analysis.qmd" 
 
 website:
   title: "DSAN 5100 Final Project"

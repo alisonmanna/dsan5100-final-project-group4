@@ -1,5 +1,10 @@
 ---
-title: "Time Series Analysis"
+title: "DSAN 5100 Final Project - Time Series Analysis"
+author: "Alison Manna"
+format: 
+  html:
+    embed-resources: true
+toc: true
 ---
 
 ## The Data: Mortality from Maternal Hypertensive Disorders
@@ -34,6 +39,9 @@ ihme <- read.csv("time_series/data/IHME-2023.csv")
 # select relevant columns, order by year
 ihme <- ihme |> select(year, val)
 
+# reformat year, fix datatypes
+# ihme$year <- as.Date(paste0(ihme$year, "-01-01"))
+# ihme$year <- format(ihme$year, "%Y")
 ihme$year <- as.numeric(ihme$year)
 
 # order
@@ -43,54 +51,38 @@ head(ihme)
 
 ```{r}
 plot <- ggplot(ihme, aes(year, mortality)) + 
-  geom_point(color = "#A8BBA3", size = 0.6) +
-  geom_line(color = "#A8BBA3", size = 0.5) + 
+  geom_point(color = "purple", size = 0.6) +
+  geom_line(color = "purple", size = 0.5) + 
   labs(title = "Maternal Mortality Ratio from Hypertensive Disorders in the United States, 1980-2023",
+    subtitle = "Deaths per 100,000 Live Births Due to Maternal Hypertensive Disorders",
     x = "Year",
     y = "Mortality Ratio") +
   theme_minimal() + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA),
-    text = element_text(color = '#B87C4C'),
-    axis.text = element_text(color = '#B87C4C'),
-    axis.title = element_text(color = '#B87C4C'),
-    plot.title = element_text(color = '#B87C4C'),
-    plot.subtitle = element_text(color = '#B87C4C'),
-    legend.text = element_text(color = '#B87C4C'),
-    legend.title = element_text(color = '#B87C4C'),
-    strip.text = element_text(color = '#B87C4C'),
-    panel.grid.major = element_blank(),
+  theme(panel.grid.major = element_blank(),
     panel.grid.minor = element_blank())
 
-# manual title because of ggplotly
-ggplotly(plot) |> layout(title = list(
-  text = paste0(
-    "Maternal Mortality Ratio from Hypertensive Disorders in the United States, 1980-2023",
-    "<br><span style='font-size:12px;'>Deaths per 100,000 Live Births Due to Maternal Hypertensive Disorders</span>"
-  )
-))
+ggplotly(plot)
+
 ```
 
-The above line plot shows the series of maternal mortality rate caused by maternal hypertensive disorders like gestational hypertension and preeclampsia. The frequency of the data is yearly covering a 43-year time span, and shows an increasing rate of proportion of maternal deaths caused by hypertensive disorders over time. Tracking the proportion of deaths from these disorders rather than the number of deaths allows us to understand the impact of the disorders while controlling for general population growth. 
-
-Looking at the plot, there are a couple of important points of interest. The first is a significant and steady decrease in the proportion of deaths caused by maternal hypertension between 1980 and 1990, which was likely caused by general improvements in maternal healthcare prenatal care in the US during that decade. 
-
-There has also been a significant increase in the mortality ratio in the last decade, with a particularly high spike in 2020. This spike coincides with the COVID-19 pandemic, which disrupted healthcare serives, limited access to prenatal care, and increased things like stress and comorbidities, all of which could have led to higher maternal mortality rates. 
-
-In the years following 2020, there has been a continuing decrease, which likely reflects the healthcare systems recovery from the pandemic.
-
-## Decomposition
-
+conversion to TS component
 ```{r}
 ihme_ts <- ts(ihme$mortality, start = 1980, frequency = 1)
 ```
 
-`decomposed = decompose(ihme_ts)`
+## Decomposition
 
-`autoplot(decomposed)`
+```{r}
+decomposed = decompose(ihme_ts)
+autoplot(decomposed)
 
-Since we can't decompose annual data, we perform a moving average calculation to extract the trend component.
+# library(seasonal)
+# ihme_ts %>% seas(x11="") -> fit
+# autoplot(fit) +
+#   ggtitle("X11 decomposition")
+```
+
+since we can't decompose annual data, we perform a moving average calculation to extract the trend component.
 
 ```{r}
 # centered moving average (NA at edges is expected)
@@ -99,84 +91,80 @@ trend_mortality <- ma(ihme_ts, order = 6, centre = TRUE)
 plot_ly(x = ~time(ihme_ts)) |>
   add_lines(y = ~as.numeric(ihme_ts), name = "Original") |>
   add_lines(y = ~as.numeric(trend_mortality), name = "Trend (MA)", line = list(dash = "dash")) |>
-  layout(
-    title = "Maternal Mortality: Original vs Trend", 
-    xaxis = list(title = "Year"), 
-    yaxis = list(title = "Mortality Ratio"),
-    plot_bgcolor = '#F7F1DE',
-    paper_bgcolor = '#F7F1DE')
+  layout(title = "Maternal Mortality: Original vs Trend", xaxis = list(title = "Year"), yaxis = list(title = "Mortality Ratio"))
 ```
-
-The moving average calculation produces a smoother line without the randomness of the original series, showing the increasing trend of the data more clearly.
 
 ## Lag Plots
 ```{r}
 gglagplot(ihme_ts, do.lines=FALSE) +
   xlab("Lags") +
   ylab("Yt") +
-  ggtitle("Lag Plot for Maternal Hypertension Mortality") + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+  ggtitle("Lag Plot for Maternal Hypertension Mortality")
 ```
-
-The lag plot shows the tighest and most elongated pattern along the 45-degree line at lag 1, which indicates a strong autocorrealtion between successive values, implying a strong relationship between current and immediate past values in the dataset. As the lags increase, the points become more scattered and dispersed, which indicates decreasing correlation between current and past values.
 
 ## ACF and PACF
 
 ```{r, warning=FALSE, message=FALSE}
-ihme_acf <- ggAcf(ihme_ts, main = "ACF of Maternal Hypertension Mortality")  + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+ihme_acf <- ggAcf(ihme_ts, main = "ACF of Maternal Hypertension Mortality")
 ihme_acf
+
+# ihme_pacf <- ggPacf(ihme_ts, main = "PACF of Maternal Hypertension Mortality")
+
+# grid.arrange(ihme_acf, ihme_pacf, nrow = 2)
 ```
 
-The ACF plot shows high autocorrelation at many lags with a slow, gradual decay in the magnitude of that autocorrelation. This is an indicator that the data are non-stationary, and a hint that we may need to difference the data.
+ACF: gradual decay, non-stationary (has a trend)
 
-## Augmented Dickey-Fuller Test
+## ADF test
 
 ```{r}
 adf.test(ihme_ts)
 ```
 
-The ADF Test returns a p-value of.8508. This value is very high and well above the significance level of 0.05, so we fail to reject the null hypothesis, and can therefore conclude that the series is non-stationary.
+High p-value (0.8508): Fail to reject the null hypothesis, the series is non-stationary
 
-The results from an ADF test alone can at times be unreliable, but this result *combined* with out observations of the ACF plot above provide strong evidence that our data is not stationary.
+the results from the ADF test support my observations in the ACF plot
 
 ## Differencing
 
 ```{r}
 diff_ihme <- diff(ihme_ts)
 
-# Plot original vs. differenced
-acf_plot_1 <- ggAcf(ihme_ts, 40) +
-  ggtitle("ACF of Original Series") +
-  theme_minimal()  + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+# First-order differencing
+diff_1 <- diff(ts_indeed)
 
-acf_plot_2 <- ggAcf(diff_ihme, 40) +
+# Second-order differencing
+diff_2 <- diff(ts_indeed, differences = 2)
+
+# Plot original vs. differenced
+acf_plot_1 <- ggAcf(ihme_ts,50) +
+  ggtitle("ACF of Original Series") +
+  theme_minimal()
+
+acf_plot_2 <- ggAcf(diff_ihme,50) +
   ggtitle("ACF of Differenced Series") +
-  theme_minimal() + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+  theme_minimal()
 
 # Display both ACF plots side by side
 acf_plot_1 / acf_plot_2
 ```
 
-As evident in the ACF plots of the original and first-differenced data above, first-order differencing significantly reduces the autocorrelation across all lags. Therefore, first-order differencing is necessary for this data. First-order is sufficient and the data does not need second-order differencing.
+differencing signiciantly reduces the autocorrelation across all lags, therefore it is necessary. this is sufficient and the data does not need second-order differencing.
 
 ## Log Transformation
 
-```{r, warning=FALSE, message=FALSE}
+```{r}
+ihme$log_mortality <- log(ihme$mortality)
+
+plot_ly(ihme, x = ~as.Date(year)) |>
+  add_lines(y = ~mortality, name = 'Original Prices', line = list(color = 'blue')) %>%
+  add_lines(y = ~log_mortality, name = 'Log-Transformed', line = list(color = 'red')) %>%
+  layout(title = "Original vs Log-Transformed Maternal Hypertension Mortality",
+         xaxis = list(title = "Date"),
+         yaxis = list(title = "Price"))
+```
+
+```{r}
 library(patchwork)
 
 ihme$log_mortality <- log(ihme$mortality)
@@ -192,52 +180,35 @@ p1 <- ggplot() +
   labs(title = "Differenced Mortality",
        x = "Time",
        y = "Differenced Mortality Ratio") +
-  theme_minimal() + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+  theme_minimal()
 
 p2 <- ggplot() +
   geom_line(aes(x = time(diff_log_ihme), y = diff_log_ihme), size = 0.9, color = "red") +
   labs(title = "Differenced Log-Transformed Mortality",
        x = "Time",
        y = "Differenced Log Mortality Ratio") +
-  theme_minimal() + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+  theme_minimal()
 
 # Combine plots
 p1 / p2
 ```
 
-The original series did not visually show extreme skew, outliers, or multiplicative relationship, but we performed a log-transformation anyway to confirm. The results of this above confirm that a log transformation is not necessary for this data.
+the original series did not visually show extreme skew, outliers, or multiplicative relationship, and the plot above confirms that a log transformation is not necessary for this data.
 
 ## ACF/PACF to identify ARIMA orders
 
 ```{r, warning=FALSE, message=FALSE}
-ihme_acf <- ggAcf(ihme_ts, main = "ACF of Maternal Hypertension Mortality") + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+ihme_acf <- ggAcf(ihme_ts, main = "ACF of Maternal Hypertension Mortality")
+ihme_acf
 
-ihme_pacf <- ggPacf(ihme_ts, main = "PACF of Maternal Hypertension Mortality") + 
-  theme(
-    plot.background = element_rect(fill = '#F7F1DE', color = NA),
-    panel.background = element_rect(fill = '#F7F1DE', color = NA)
-  )
+ihme_pacf <- ggPacf(ihme_ts, main = "PACF of Maternal Hypertension Mortality")
 
 grid.arrange(ihme_acf, ihme_pacf, nrow = 2)
 ```
 
-We will consider the following parameter orders, based on the ACF and PACF plots above:
-
-- **d = 1** (plus **d = 0** to test a wider variety of models)
-- **q = 0:3** (no further to maintain parsimony)
-- **p = 1** (plus **p = 0** to test a wider variety of models)
+d = 1, test 0 too
+q = 0:3 (no further to maintain parsimony)
+p = 1, 0 too
 
 ## Manual ARIMA Parameter search
 
@@ -269,8 +240,7 @@ for (q in q_range) {
     }
   }
 }
-```
-```{r}
+
 # Convert matrix to data frame
 results_df <- as.data.frame(results_matrix)
 colnames(results_df) <- c("p", "d", "q", "AIC", "BIC", "AICc")
@@ -284,7 +254,7 @@ knitr::kable(results_df, align = 'c', caption = "Comparison of ARIMA Models") |>
   row_spec(highlight_row, bold = TRUE, background = "#FFFF99")
 ```
 
-The manual search returned **ARIMA(1,1,3)** as the model with the lowest AIC.
+returned ARIMA(1,1,3)
 
 ## Auto.arima()
 
@@ -293,7 +263,7 @@ auto_model <- auto.arima(ihme_ts)
 auto_model
 ```
 
-Auto.arima() returned **ARIMA(0,1,0)** (random walk) as the best model.
+returned ARIMA(0,1,0), random walk
 
 ## Model Diagnostics
 ```{r}
@@ -327,11 +297,13 @@ The Ljung-Box Test p-values are all above the 0.05 significance level for both m
 
 In the ARIMA(1,1,3) model, the ar1 and ma2 coefficients are insignificant, with p-values of 0.1126 and 0.4432, respectively. The ARIMA(0,1,0) model is much simpler and does not have variables/predictors.
 
-**ARIMA(0,1,0) is more parsimonious than ARIMA(1,1,3) and demonstrates slightly more significance in the LB test, but it is a very simplistic model. We ran model diagnostics on some other, higher order ARIMA models and the one below produced equally strong diagnostic plots.**
+<!-- I will proceed with ARIMA(0,1,0). Even though both models perform similarly, ARIMA(0,1,0) is more parsimonious than ARIMA(1,1,3), demonstrates slightly more significance in the LB test, and has no insignificant coefficients. -->
+
+ARIMA(0,1,0) is more parsimonious than ARIMA(1,1,3) and demonstrates slightly more significance in the LB test, but it is a very simplistic model. We ran model diagnostics on some other, higher order ARIMA models and the one below produced equally strong diagnostic plots.
 
 ```{r}
 set.seed(5100)
-# try: ARIMA(2,1,2)
+# try: ARIMA(2,1,1)
 model_output <- capture.output(sarima(ihme_ts, 2, 1, 2))
 
 # capture coefficient details
@@ -340,7 +312,7 @@ end_line <- length(model_output)
 cat(model_output[start_line:end_line], sep = "\n")
 ```
 
-**ARIMA(2,1,2)** produces very similar diagnostic plots, but also comes with the added addvantages of a lower AIC value and all significant coefficients. Therefore, we will proceed with this model. 
+**ARIMA(2,1,1)** produces very similar diagnostic plots, but also comes with the added addvantages of a lower AIC value and all significant coefficients. Therefore, we will proceed with this model. 
 
 ## Benchmark Error and Forecast Comparison 
 
@@ -382,8 +354,6 @@ results <- data.frame(
 knitr::kable(results, digits = 3, caption = "MAE and MSE for Each Model")
 ```
 
-The ARIMA model, compared to the Benchmarks, achieves the lowest mean absolute error and mean squared error.
-
 ```{r}
 # Generate forecasts
 mean_forecast <- meanf(ihme_ts, h = 10)
@@ -412,16 +382,12 @@ plot_ly() |>
   layout(title = 'Maternal Hypertension Mortality Ratio Forecast',
          xaxis = list(title = 'Date'),
          yaxis = list(title = 'Ratio'),
-         legend = list(title = list(text = 'Forecast Methods')),
-         plot_bgcolor = '#F7F1DE',
-         paper_bgcolor = '#F7F1DE')
+         legend = list(title = list(text = 'Forecast Methods')))
 ```
 
 It is clear that the ARIMA model provides a better fit and forecast than the simple baseline models.
 
 ## Final ARIMA(2,1,2) Forecast
-
-Finally, we isolate and plot the ARIMA forecast to observe the model's 10-year prediction. 
 
 ```{r}
 forecast_result <- forecast(fit, h = 10)
@@ -434,4 +400,25 @@ autoplot(forecast_result) +
   theme_bw()
 ```
 
-The forecasted mortality rate for the next 10 years appears to fit the shape and behavior as the historical mortality rate, and the confience interval is conservative and wide, but still within what appears to be an acceptable range. The forecast shows that the proportion of deaths caused by maternal hypertensive disorders will continue to oscillate as it has done in the past, but will generally stay close to the current level. This means that, according to the forecast, the rate will continue to stay below its COVID-19 peak, but it will not stabilize or reduce further in the next decade. If this forecast is considered seriously, it serves as a sign that further action — for example, improvements to the healthcare system and expanded access to it — will be necessary.
+<!-- ```{r}
+who <- read.csv("time_series/data/maternal-mortality-rate-who-mdb.csv")
+
+who <- who |> 
+  rename(Deaths = Age.standardized.deaths.from.maternal.conditions.in.both.sexes.in.those.aged.all.ages.per.100.000.people) |> 
+  select(Year, Deaths) |>
+  arrange(Year)
+
+head(who)
+
+plot <- ggplot(who, aes(Year, Deaths)) + 
+  geom_line(color = "purple", size = 0.5) + 
+  labs(title = "Age-Standardized Deaths from Maternal Conditions in the United States, 1950-2022",
+    x = "Year",
+    y = "Mortality Rate") +
+  theme_minimal() + 
+  theme(panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank())
+
+ggplotly(plot)
+``` 
+m-->
