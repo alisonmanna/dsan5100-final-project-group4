@@ -2,7 +2,7 @@ library(tidyverse)
 library(ggplot2)
 library(dplyr)
 
-df <- read.csv("data/cleaned/natality_cleaned.csv")
+df <- read.csv("../data/cleaned/natality_cleaned.csv")
 head(df)
 
 #histograms for numeric columns 
@@ -12,28 +12,8 @@ for (col in number_columns) {
   print(
     ggplot(df, aes_string(x=col)) +
       geom_histogram(bins = 30, fill = "skyblue", color = "black") + 
-      ggtitle(paste("Histogram of Infant Birthweight")) + 
+      ggtitle(paste("Histogram of", col)) + 
       theme_minimal()
-  )
-}
-
-# to save to png
-for (col in number_columns) {
-
-  p <- ggplot(df, aes_string(x = col)) +
-    geom_histogram(bins = 30, fill = "skyblue", color = "black") +
-    ggtitle(paste("Histogram of Infant Birthweight")) +
-    theme_minimal()
-
-  print(p)
-
-  # Save to PNG
-  ggsave(
-    filename = paste0("../plots/eda/histogram_.png", col, ".png"),
-    plot = p,
-    width = 6,
-    height = 4,
-    dpi = 300
   )
 }
 

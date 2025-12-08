@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -66,6 +120,17 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 </head>
@@ -96,16 +161,16 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Exploratory Data Analysis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./report.html"> 
-<span class="menu-text">Project Report</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./hypothesis_testing.html"> 
 <span class="menu-text">Hypothesis Testing</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./time_series.html" aria-current="page"> 
 <span class="menu-text">Time Series Analysis</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./report.html"> 
+<span class="menu-text">Project Report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
@@ -122,7 +187,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#mortality-from-maternal-hypertensive-disorders-ihme" id="toc-mortality-from-maternal-hypertensive-disorders-ihme" class="nav-link active" data-scroll-target="#mortality-from-maternal-hypertensive-disorders-ihme">Mortality from Maternal Hypertensive Disorders (IHME)</a></li>
+  <li><a href="#decomposition" id="toc-decomposition" class="nav-link" data-scroll-target="#decomposition">Decomposition</a></li>
+  <li><a href="#lag-plots" id="toc-lag-plots" class="nav-link" data-scroll-target="#lag-plots">Lag Plots</a></li>
+  <li><a href="#acf-and-pacf" id="toc-acf-and-pacf" class="nav-link" data-scroll-target="#acf-and-pacf">ACF and PACF</a></li>
+  <li><a href="#augmented-dickey-fuller-test" id="toc-augmented-dickey-fuller-test" class="nav-link" data-scroll-target="#augmented-dickey-fuller-test">Augmented Dickey-Fuller Test</a></li>
+  <li><a href="#differencing" id="toc-differencing" class="nav-link" data-scroll-target="#differencing">Differencing</a></li>
+  <li><a href="#log-transformation" id="toc-log-transformation" class="nav-link" data-scroll-target="#log-transformation">Log Transformation</a></li>
+  <li><a href="#acfpacf-to-identify-arima-orders" id="toc-acfpacf-to-identify-arima-orders" class="nav-link" data-scroll-target="#acfpacf-to-identify-arima-orders">ACF/PACF to identify ARIMA orders</a></li>
+  <li><a href="#manual-arima-parameter-search" id="toc-manual-arima-parameter-search" class="nav-link" data-scroll-target="#manual-arima-parameter-search">Manual ARIMA Parameter search</a></li>
+  <li><a href="#auto.arima" id="toc-auto.arima" class="nav-link" data-scroll-target="#auto.arima">Auto.arima()</a></li>
+  <li><a href="#model-diagnostics" id="toc-model-diagnostics" class="nav-link" data-scroll-target="#model-diagnostics">Model Diagnostics</a></li>
+  <li><a href="#benchmark-error-and-forecast-comparison" id="toc-benchmark-error-and-forecast-comparison" class="nav-link" data-scroll-target="#benchmark-error-and-forecast-comparison">Benchmark Error and Forecast Comparison</a></li>
+  <li><a href="#final-arima212-forecast" id="toc-final-arima212-forecast" class="nav-link" data-scroll-target="#final-arima212-forecast">Final ARIMA(2,1,2) Forecast</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -150,10 +233,794 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="mortality-from-maternal-hypertensive-disorders-ihme" class="level2">
+<h2 class="anchored" data-anchor-id="mortality-from-maternal-hypertensive-disorders-ihme">Mortality from Maternal Hypertensive Disorders (IHME)</h2>
+<p>The World Health Organization (WHO) estimates that around 300,000 women globally died from pregnancy-related deaths in 2017, which is around 800 each day on average.</p>
+<p>According to the ICD-11, maternal deaths are defined as the deaths of women while pregnant or within 42 days of termination of pregnancy, from pregnancy-related causes, but excluding accidental or incidental causes of death.</p>
+<p>Here, we perform a time series analysis of data collected from the Institute for Health Metrics and Evaluation <span class="citation" data-cites="GBD2024">(<a href="#ref-GBD2024" role="doc-biblioref">2024</a>)</span> (<a href="https://vizhub.healthdata.org/gbd-results/,%20accessed%20via%20https://ourworldindata.org/maternal-mortality">link</a>) on the proportion of maternal deaths — defined as deaths from pregnancy-related causes of women while pregnant or within 42 days of termination of pregnancy, not including accidental or incidental causes — from maternal conditions caused by hypertensive disorders, such as gestational hypertension and preeclampsia. The data was originally sourced from the <a href="https://ourworldindata.org/maternal-mortality">Our World In Data Maternal Mortality Report</a>, which tracks maternal deaths and their causes and prevalence around the globe.</p>
+<p>The below time series analysis uses annual data collected between 1980 and 2023 and aims to fit an ARIMA (Autoregressive Integrated Moving Average) model to the data in order to understand the underlying autocorrelation in the data and use these temporal dynamics to accurately forecast the future of maternal mortality due to hypertension.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ihme <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"time_series/data/IHME-2023.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># select relevant columns, order by year</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ihme <span class="ot">&lt;-</span> ihme <span class="sc">|&gt;</span> <span class="fu">select</span>(year, val)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ihme<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ihme<span class="sc">$</span>year)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># order</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ihme <span class="ot">&lt;-</span> ihme <span class="sc">|&gt;</span> <span class="fu">arrange</span>(year) <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">mortality =</span> val)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ihme)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year mortality
+1 1980  2.149895
+2 1981  1.871614
+3 1982  1.781776
+4 1983  1.810176
+5 1984  1.756494
+6 1985  1.703607</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ihme, <span class="fu">aes</span>(year, mortality)) <span class="sc">+</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"#A8BBA3"</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#A8BBA3"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Maternal Mortality Ratio from Hypertensive Disorders in the United States, 1980-2023"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mortality Ratio"</span>) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'#B87C4C'</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'#B87C4C'</span>),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'#B87C4C'</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'#B87C4C'</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'#B87C4C'</span>),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'#B87C4C'</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'#B87C4C'</span>),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'#B87C4C'</span>),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># manual title because of ggplotly</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(plot) <span class="sc">|&gt;</span> <span class="fu">layout</span>(<span class="at">title =</span> <span class="fu">list</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> <span class="fu">paste0</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Maternal Mortality Ratio from Hypertensive Disorders in the United States, 1980-2023"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&lt;br&gt;&lt;span style='font-size:12px;'&gt;Deaths per 100,000 Live Births Due to Maternal Hypertensive Disorders&lt;/span&gt;"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-3ed460fd0ee6517af67c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-3ed460fd0ee6517af67c">{"x":{"data":[{"x":[1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[2.1498947091672216,1.8716144428733987,1.7817762418531002,1.8101764162295584,1.7564936745657651,1.7036067209210493,1.5928021129199457,1.5283289306647638,1.8528740740382932,1.7377132745286048,1.7860467259185839,1.7397236303605053,1.6914657753949518,1.6855008132400018,1.8078127105034201,1.5944038674396313,1.5716734051787071,1.6781793509126592,1.5451476362634209,1.7535773744906542,1.8425906115986701,1.8494689755233196,1.8141636703049893,1.9484395061038595,2.0435930203410737,2.0144547248794056,2.0245621530632958,2.0576518896216842,1.985491327276012,2.2335189504623241,1.9086628354282795,1.9708368565125651,2.1454107086422405,2.102051604206717,1.9939438064336907,2.4066718652244274,2.5665713704565056,2.6741111381245046,2.577751158795774,2.7211338389390654,3.3381454542437403,3.1316534124366724,2.9195060978976857,2.8293703429739132],"text":["year: 1980<br />mortality: 2.149895","year: 1981<br />mortality: 1.871614","year: 1982<br />mortality: 1.781776","year: 1983<br />mortality: 1.810176","year: 1984<br />mortality: 1.756494","year: 1985<br />mortality: 1.703607","year: 1986<br />mortality: 1.592802","year: 1987<br />mortality: 1.528329","year: 1988<br />mortality: 1.852874","year: 1989<br />mortality: 1.737713","year: 1990<br />mortality: 1.786047","year: 1991<br />mortality: 1.739724","year: 1992<br />mortality: 1.691466","year: 1993<br />mortality: 1.685501","year: 1994<br />mortality: 1.807813","year: 1995<br />mortality: 1.594404","year: 1996<br />mortality: 1.571673","year: 1997<br />mortality: 1.678179","year: 1998<br />mortality: 1.545148","year: 1999<br />mortality: 1.753577","year: 2000<br />mortality: 1.842591","year: 2001<br />mortality: 1.849469","year: 2002<br />mortality: 1.814164","year: 2003<br />mortality: 1.948440","year: 2004<br />mortality: 2.043593","year: 2005<br />mortality: 2.014455","year: 2006<br />mortality: 2.024562","year: 2007<br />mortality: 2.057652","year: 2008<br />mortality: 1.985491","year: 2009<br />mortality: 2.233519","year: 2010<br />mortality: 1.908663","year: 2011<br />mortality: 1.970837","year: 2012<br />mortality: 2.145411","year: 2013<br />mortality: 2.102052","year: 2014<br />mortality: 1.993944","year: 2015<br />mortality: 2.406672","year: 2016<br />mortality: 2.566571","year: 2017<br />mortality: 2.674111","year: 2018<br />mortality: 2.577751","year: 2019<br />mortality: 2.721134","year: 2020<br />mortality: 3.338145","year: 2021<br />mortality: 3.131653","year: 2022<br />mortality: 2.919506","year: 2023<br />mortality: 2.829370"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(168,187,163,1)","opacity":1,"size":2.2677165354330708,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(168,187,163,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.8897637795275593,"color":"rgba(168,187,163,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":40.840182648401829,"r":7.3059360730593621,"b":37.260273972602747,"l":43.105022831050235},"plot_bgcolor":"rgba(247,241,222,1)","paper_bgcolor":"rgba(247,241,222,1)","font":{"color":"rgba(184,124,76,1)","family":"","size":14.611872146118724},"title":{"text":"Maternal Mortality Ratio from Hypertensive Disorders in the United States, 1980-2023<br><span style='font-size:12px;'>Deaths per 100,000 Live Births Due to Maternal Hypertensive Disorders<\/span>","font":{"color":"rgba(184,124,76,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1977.8499999999999,2025.1500000000001],"tickmode":"array","ticktext":["1980","1990","2000","2010","2020"],"tickvals":[1980,1990,2000,2010,2020],"categoryorder":"array","categoryarray":["1980","1990","2000","2010","2020"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(184,124,76,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(184,124,76,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.4378381044858151,3.4286362804226891],"tickmode":"array","ticktext":["1.5","2.0","2.5","3.0"],"tickvals":[1.5,2,2.5,3],"categoryorder":"array","categoryarray":["1.5","2.0","2.5","3.0"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(184,124,76,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Mortality Ratio","font":{"color":"rgba(184,124,76,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(184,124,76,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"10e65f9575b":{"x":{},"y":{},"type":"scatter"},"10e634d61a6d":{"x":{},"y":{}}},"cur_data":"10e65f9575b","visdat":{"10e65f9575b":["function (y) ","x"],"10e634d61a6d":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>The above line plot shows the series of maternal mortality rate caused by maternal hypertensive disorders like gestational hypertension and preeclampsia. The frequency of the data is yearly covering a 43-year time span, and shows an increasing rate of proportion of maternal deaths caused by hypertensive disorders over time. Tracking the proportion of deaths from these disorders rather than the number of deaths allows us to understand the impact of the disorders while controlling for general population growth.</p>
+<p>Looking at the plot, there are a couple of important points of interest. The first is a significant and steady decrease in the proportion of deaths caused by maternal hypertension between 1980 and 1990, which was likely caused by general improvements in maternal healthcare prenatal care in the US during that decade.</p>
+<p>There has also been a significant increase in the mortality ratio in the last decade, with a particularly high spike in 2020. This spike coincides with the COVID-19 pandemic, which disrupted healthcare serives, limited access to prenatal care, and increased things like stress and comorbidities, all of which could have led to higher maternal mortality rates.</p>
+<p>In the years following 2020, there has been a continuing decrease, which likely reflects the healthcare systems recovery from the pandemic.</p>
+</section>
+<section id="decomposition" class="level2">
+<h2 class="anchored" data-anchor-id="decomposition">Decomposition</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ihme_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(ihme<span class="sc">$</span>mortality, <span class="at">start =</span> <span class="dv">1980</span>, <span class="at">frequency =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><code>decomposed = decompose(ihme_ts)</code> <br> <code>autoplot(decomposed)</code></p>
+<p>Since we can’t decompose annual data, we perform a moving average calculation to extract the trend component.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># centered moving average (NA at edges is expected)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>trend_mortality <span class="ot">&lt;-</span> <span class="fu">ma</span>(ihme_ts, <span class="at">order =</span> <span class="dv">6</span>, <span class="at">centre =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">x =</span> <span class="sc">~</span><span class="fu">time</span>(ihme_ts)) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_lines</span>(<span class="at">y =</span> <span class="sc">~</span><span class="fu">as.numeric</span>(ihme_ts), <span class="at">name =</span> <span class="st">"Original"</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"#A8BBA3"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_lines</span>(<span class="at">y =</span> <span class="sc">~</span><span class="fu">as.numeric</span>(trend_mortality), <span class="at">name =</span> <span class="st">"Trend (MA)"</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"#B87C4C"</span>, <span class="at">dash =</span> <span class="st">"dash"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layout</span>(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Maternal Mortality: Original vs Trend"</span>, </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Year"</span>), </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Mortality Ratio"</span>),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot_bgcolor =</span> <span class="st">'#F7F1DE'</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">paper_bgcolor =</span> <span class="st">'#F7F1DE'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-6ecc2d5d762c77dfe155" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-6ecc2d5d762c77dfe155">{"x":{"visdat":{"10e6f1507aa":["function () ","plotlyVisDat"]},"cur_data":"10e6f1507aa","attrs":{"10e6f1507aa":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"type":"scatter","mode":"lines","name":"Original","line":{"color":"#A8BBA3"},"inherit":true},"10e6f1507aa.1":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"type":"scatter","mode":"lines","name":"Trend (MA)","line":{"color":"#B87C4C","dash":"dash"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Maternal Mortality: Original vs Trend","xaxis":{"domain":[0,1],"automargin":true,"title":"Year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Mortality Ratio"},"plot_bgcolor":"#F7F1DE","paper_bgcolor":"#F7F1DE","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[2.1498947091672216,1.8716144428733987,1.7817762418531002,1.8101764162295584,1.7564936745657651,1.7036067209210493,1.5928021129199457,1.5283289306647638,1.8528740740382932,1.7377132745286048,1.7860467259185839,1.7397236303605053,1.6914657753949518,1.6855008132400018,1.8078127105034201,1.5944038674396313,1.5716734051787071,1.6781793509126592,1.5451476362634209,1.7535773744906542,1.8425906115986701,1.8494689755233196,1.8141636703049893,1.9484395061038595,2.0435930203410737,2.0144547248794056,2.0245621530632958,2.0576518896216842,1.985491327276012,2.2335189504623241,1.9086628354282795,1.9708368565125651,2.1454107086422405,2.102051604206717,1.9939438064336907,2.4066718652244274,2.5665713704565056,2.6741111381245046,2.577751158795774,2.7211338389390654,3.3381454542437403,3.1316534124366724,2.9195060978976857,2.8293703429739132],"type":"scatter","mode":"lines","name":"Original","line":{"color":"#A8BBA3"},"marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],"y":[1.7991693179144093,1.7241378088764165,1.7014555022077964,1.7013417264148165,1.6977658855524715,1.7032383822851616,1.7144700966113668,1.7357897253655536,1.7451322686189172,1.7294347044002636,1.6996278104145257,1.6766346770655489,1.6593128088506006,1.6527926773605275,1.6613638825560195,1.6855174666542643,1.7269804144217618,1.7697096161148855,1.8337684110539565,1.8970453055928238,1.9339493799139382,1.9664622512108541,1.9980881321333031,2.0361220572440937,2.0486344955312332,2.033755491091263,2.0401913816922721,2.0539620708726036,2.0583664203511627,2.0735002031778116,2.1427553239936721,2.2561872253803523,2.3508217863608087,2.4384403434346322,2.6020473336464987,2.7744792665650229,2.8643056227861421,2.906655117143691],"type":"scatter","mode":"lines","name":"Trend (MA)","line":{"color":"#B87C4C","dash":"dash"},"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>The moving average calculation produces a smoother line without the randomness of the original series, showing the increasing trend of the data more clearly.</p>
+</section>
+<section id="lag-plots" class="level2">
+<h2 class="anchored" data-anchor-id="lag-plots">Lag Plots</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gglagplot</span>(ihme_ts, <span class="at">do.lines=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Lags"</span>) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Yt"</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Lag Plot for Maternal Hypertension Mortality"</span>) <span class="sc">+</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="time_series_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The lag plot shows the tighest and most elongated pattern along the 45-degree line at lag 1, which indicates a strong autocorrealtion between successive values, implying a strong relationship between current and immediate past values in the dataset. As the lags increase, the points become more scattered and dispersed, which indicates decreasing correlation between current and past values.</p>
+</section>
+<section id="acf-and-pacf" class="level2">
+<h2 class="anchored" data-anchor-id="acf-and-pacf">ACF and PACF</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ihme_acf <span class="ot">&lt;-</span> <span class="fu">ggAcf</span>(ihme_ts, <span class="at">main =</span> <span class="st">"ACF of Maternal Hypertension Mortality"</span>)  <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ihme_acf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="time_series_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The ACF plot shows high autocorrelation at many lags with a slow, gradual decay in the magnitude of that autocorrelation. This is an indicator that the data are non-stationary, and a hint that we may need to difference the data.</p>
+</section>
+<section id="augmented-dickey-fuller-test" class="level2">
+<h2 class="anchored" data-anchor-id="augmented-dickey-fuller-test">Augmented Dickey-Fuller Test</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(ihme_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Augmented Dickey-Fuller Test
+
+data:  ihme_ts
+Dickey-Fuller = -1.3004, Lag order = 3, p-value = 0.8508
+alternative hypothesis: stationary</code></pre>
+</div>
+</div>
+<p>The ADF Test returns a p-value of.8508. This value is very high and well above the significance level of 0.05, so we fail to reject the null hypothesis, and can therefore conclude that the series is non-stationary.</p>
+<p>The results from an ADF test alone can at times be unreliable, but this result <em>combined</em> with out observations of the ACF plot above provide strong evidence that our data is not stationary.</p>
+</section>
+<section id="differencing" class="level2">
+<h2 class="anchored" data-anchor-id="differencing">Differencing</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>diff_ihme <span class="ot">&lt;-</span> <span class="fu">diff</span>(ihme_ts)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot original vs. differenced</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>acf_plot_1 <span class="ot">&lt;-</span> <span class="fu">ggAcf</span>(ihme_ts, <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"ACF of Original Series"</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()  <span class="sc">+</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>acf_plot_2 <span class="ot">&lt;-</span> <span class="fu">ggAcf</span>(diff_ihme, <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"ACF of Differenced Series"</span>) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Display plots side by side w/patchwork</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>(acf_plot_1 <span class="sc">/</span> acf_plot_2) <span class="sc">&amp;</span> <span class="fu">plot_annotation</span>(<span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="time_series_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As evident in the ACF plots of the original and first-differenced data above, first-order differencing significantly reduces the autocorrelation across all lags. Therefore, first-order differencing is necessary for this data. First-order is sufficient and the data does not need second-order differencing.</p>
+</section>
+<section id="log-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="log-transformation">Log Transformation</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ihme<span class="sc">$</span>log_mortality <span class="ot">&lt;-</span> <span class="fu">log</span>(ihme<span class="sc">$</span>mortality)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>log_ihme_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(ihme<span class="sc">$</span>log_mortality, <span class="at">start =</span> <span class="dv">1980</span>, <span class="at">frequency =</span> <span class="dv">1</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Difference the Data</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>diff_ihme <span class="ot">&lt;-</span> <span class="fu">diff</span>(ihme_ts)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>diff_log_ihme <span class="ot">&lt;-</span> <span class="fu">diff</span>(log_ihme_ts)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plots for differenced data</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">time</span>(diff_ihme), <span class="at">y =</span> diff_ihme), <span class="at">size =</span> <span class="fl">0.9</span>, <span class="at">color =</span> <span class="st">"#B87C4C"</span>) <span class="sc">+</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Differenced Mortality"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Time"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Differenced Mortality Ratio"</span>) <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">time</span>(diff_log_ihme), <span class="at">y =</span> diff_log_ihme), <span class="at">size =</span> <span class="fl">0.9</span>, <span class="at">color =</span> <span class="st">"#51361f"</span>) <span class="sc">+</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Differenced Log-Transformed Mortality"</span>,</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Time"</span>,</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Differenced Log Mortality Ratio"</span>) <span class="sc">+</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">/</span> p2) <span class="sc">&amp;</span> <span class="fu">plot_annotation</span>(<span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="time_series_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The original series did not visually show extreme skew, outliers, or multiplicative relationship, but we performed a log-transformation anyway to confirm. The results of this above confirm that a log transformation is not necessary for this data.</p>
+</section>
+<section id="acfpacf-to-identify-arima-orders" class="level2">
+<h2 class="anchored" data-anchor-id="acfpacf-to-identify-arima-orders">ACF/PACF to identify ARIMA orders</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ihme_acf <span class="ot">&lt;-</span> <span class="fu">ggAcf</span>(ihme_ts, <span class="at">main =</span> <span class="st">"ACF of Maternal Hypertension Mortality"</span>) <span class="sc">+</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>ihme_pacf <span class="ot">&lt;-</span> <span class="fu">ggPacf</span>(ihme_ts, <span class="at">main =</span> <span class="st">"PACF of Maternal Hypertension Mortality"</span>) <span class="sc">+</span> </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F7F1DE'</span>, <span class="at">color =</span> <span class="cn">NA</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(ihme_acf, ihme_pacf, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="time_series_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We will consider the following parameter orders, based on the ACF and PACF plots above:</p>
+<ul>
+<li><strong>d = 1</strong> (plus <strong>d = 0</strong> to test a wider variety of models)</li>
+<li><strong>q = 0:3</strong> (no further to maintain parsimony)</li>
+<li><strong>p = 1</strong> (plus <strong>p = 0</strong> to test a wider variety of models)</li>
+</ul>
+</section>
+<section id="manual-arima-parameter-search" class="level2">
+<h2 class="anchored" data-anchor-id="manual-arima-parameter-search">Manual ARIMA Parameter search</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adapted from Gamage, P. (2026). Applied Time Series for Data Science.</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter ranges</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>p_range <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>d_range <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>q_range <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create matrix to store results</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>n_combinations <span class="ot">&lt;-</span> <span class="fu">length</span>(p_range) <span class="sc">*</span> <span class="fu">length</span>(d_range) <span class="sc">*</span> <span class="fu">length</span>(q_range)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>results_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n_combinations, <span class="at">ncol =</span> <span class="dv">6</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through combinations of ARIMA model parameters</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (q <span class="cf">in</span> q_range) {</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (p <span class="cf">in</span> p_range) {</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (d <span class="cf">in</span> d_range) {</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Fit ARIMA model with specified (p,d,q)</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>      model <span class="ot">&lt;-</span> <span class="fu">Arima</span>(ihme_ts, <span class="at">order =</span> <span class="fu">c</span>(p, d, q), <span class="at">include.drift =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Store model parameters and AIC/BIC/AICc values in matrix</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>      results_matrix[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(p, d, q, model<span class="sc">$</span>aic, model<span class="sc">$</span>bic, model<span class="sc">$</span>aicc)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Increment row index</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>      i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert matrix to data frame</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(results_matrix)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"p"</span>, <span class="st">"d"</span>, <span class="st">"q"</span>, <span class="st">"AIC"</span>, <span class="st">"BIC"</span>, <span class="st">"AICc"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Find row with min AIC</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>highlight_row <span class="ot">&lt;-</span> <span class="fu">which.min</span>(results_df<span class="sc">$</span>AIC)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate kable table with highlighting for the row with the lowest AIC</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(results_df, <span class="at">align =</span> <span class="st">'c'</span>, <span class="at">caption =</span> <span class="st">"Comparison of ARIMA Models"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">position =</span> <span class="st">"center"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(highlight_row, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">background =</span> <span class="st">"#FFFF99"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in attr(x, "align"): 'xfun::attr()' is deprecated.
+Use 'xfun::attr2()' instead.
+See help("Deprecated")
+Warning in attr(x, "align"): 'xfun::attr()' is deprecated.
+Use 'xfun::attr2()' instead.
+See help("Deprecated")</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Comparison of ARIMA Models</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">p</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">d</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">q</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">AIC</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">BIC</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">AICc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">16.533362</td>
+<td style="text-align: center;">21.8859311</td>
+<td style="text-align: center;">17.133362</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">-23.474392</td>
+<td style="text-align: center;">-19.9519920</td>
+<td style="text-align: center;">-23.174392</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">-22.466189</td>
+<td style="text-align: center;">-15.3294301</td>
+<td style="text-align: center;">-21.440548</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">-22.141170</td>
+<td style="text-align: center;">-16.8575698</td>
+<td style="text-align: center;">-21.525786</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">-6.729143</td>
+<td style="text-align: center;">0.4076159</td>
+<td style="text-align: center;">-5.703502</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">-22.670004</td>
+<td style="text-align: center;">-17.3864035</td>
+<td style="text-align: center;">-22.054619</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">-20.636613</td>
+<td style="text-align: center;">-11.7156652</td>
+<td style="text-align: center;">-19.057666</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">-21.115038</td>
+<td style="text-align: center;">-14.0702378</td>
+<td style="text-align: center;">-20.062407</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">-10.986569</td>
+<td style="text-align: center;">-2.0656212</td>
+<td style="text-align: center;">-9.407622</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">-21.918207</td>
+<td style="text-align: center;">-14.8734062</td>
+<td style="text-align: center;">-20.865575</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">-19.433841</td>
+<td style="text-align: center;">-8.7287036</td>
+<td style="text-align: center;">-17.163571</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">-20.161381</td>
+<td style="text-align: center;">-11.3553807</td>
+<td style="text-align: center;">-18.539760</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">-12.584026</td>
+<td style="text-align: center;">-1.8788885</td>
+<td style="text-align: center;">-10.313756</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">-25.450682</td>
+<td style="text-align: center;">-16.6446811</td>
+<td style="text-align: center;">-23.829060</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">-23.296942</td>
+<td style="text-align: center;">-10.8076148</td>
+<td style="text-align: center;">-20.185831</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; font-weight: bold; background-color: rgba(255, 255, 153, 255) !important;">1</td>
+<td style="text-align: center; font-weight: bold; background-color: rgba(255, 255, 153, 255) !important;">1</td>
+<td style="text-align: center; font-weight: bold; background-color: rgba(255, 255, 153, 255) !important;">3</td>
+<td style="text-align: center; font-weight: bold; background-color: rgba(255, 255, 153, 255) !important;">-25.809335</td>
+<td style="text-align: center; font-weight: bold; background-color: rgba(255, 255, 153, 255) !important;">-15.2421343</td>
+<td style="text-align: center; font-weight: bold; background-color: rgba(255, 255, 153, 255) !important;">-23.476002</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>The manual search returned <strong>ARIMA(1,1,3)</strong> as the model with the lowest AIC.</p>
+</section>
+<section id="auto.arima" class="level2">
+<h2 class="anchored" data-anchor-id="auto.arima">Auto.arima()</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>auto_model <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(ihme_ts)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>auto_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: ihme_ts 
+ARIMA(0,1,0) 
+
+sigma^2 = 0.03116:  log likelihood = 13.56
+AIC=-25.13   AICc=-25.03   BIC=-23.37</code></pre>
+</div>
+</div>
+<p>Auto.arima() returned <strong>ARIMA(0,1,0)</strong> (random walk) as the best model.</p>
+</section>
+<section id="model-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="model-diagnostics">Model Diagnostics</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5100</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ARIMA(1,1,3)</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">capture.output</span>(<span class="fu">sarima</span>(ihme_ts, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="time_series_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># capture coefficient details</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>start_line <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"Coefficients"</span>, model_output)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>end_line <span class="ot">&lt;-</span> <span class="fu">length</span>(model_output)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(model_output[start_line<span class="sc">:</span>end_line], <span class="at">sep =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coefficients: 
+         Estimate     SE t.value p.value
+ar1        0.3462 0.2131  1.6242  0.1126
+ma1       -0.7904 0.1820 -4.3438  0.0001
+ma2        0.1521 0.1964  0.7748  0.4432
+ma3        0.6068 0.1559  3.8913  0.0004
+constant   0.0101 0.0320  0.3143  0.7550
+
+sigma^2 estimated as 0.0214264 on 38 degrees of freedom 
+ 
+AIC = -0.6002171  AICc = -0.562505  BIC = -0.3544682 
+ </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5100</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">capture.output</span>(<span class="fu">sarima</span>(ihme_ts, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="time_series_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># capture coefficient details</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>start_line <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"Coefficients"</span>, model_output)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>end_line <span class="ot">&lt;-</span> <span class="fu">length</span>(model_output)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(model_output[start_line<span class="sc">:</span>end_line], <span class="at">sep =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coefficients: 
+         Estimate     SE t.value p.value
+constant   0.0158 0.0268  0.5894  0.5587
+
+sigma^2 estimated as 0.03090565 on 42 degrees of freedom 
+ 
+AIC = -0.5459161  AICc = -0.5436472  BIC = -0.4639998 
+ </code></pre>
+</div>
+</div>
+<p>The Residual Plots for both ARIMA(3,1,2) and ARIMA(0,1,0) show fairly consistent fluctuation around zero, meaning the residuals are likely pretty close to stationary, which is an indication of strong-fitting models.</p>
+<p>The ACF of the residuals of both ARIMA models has no significant autocorrelations.</p>
+<p>The Q-Q Plot of both models shows the residuals closely following a normal distribution, with only slight deviations at the tails.</p>
+<p>The Ljung-Box Test p-values are all above the 0.05 significance level for both models, which means there is little of autocorrelation remaining. The p-values are just slighly higher on average in the ARIMA(0,1,0) model compared to the ARIMA(1,1,3) model.</p>
+<p>In the ARIMA(1,1,3) model, the ar1 and ma2 coefficients are insignificant, with p-values of 0.1126 and 0.4432, respectively. The ARIMA(0,1,0) model is much simpler and does not have variables/predictors.</p>
+<p><strong>ARIMA(0,1,0) is more parsimonious than ARIMA(1,1,3) and demonstrates slightly more significance in the LB test, but it is a very simplistic model. We ran model diagnostics on some other, higher order ARIMA models and the one below produced equally strong diagnostic plots.</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5100</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># try: ARIMA(2,1,2)</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">capture.output</span>(<span class="fu">sarima</span>(ihme_ts, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="time_series_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># capture coefficient details</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>start_line <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"Coefficients"</span>, model_output)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>end_line <span class="ot">&lt;-</span> <span class="fu">length</span>(model_output)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(model_output[start_line<span class="sc">:</span>end_line], <span class="at">sep =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coefficients: 
+         Estimate     SE  t.value p.value
+ar1        0.5183 0.1061   4.8846  0.0000
+ar2       -0.8504 0.1022  -8.3185  0.0000
+ma1       -0.9389 0.0857 -10.9562  0.0000
+ma2        1.0000 0.1116   8.9601  0.0000
+constant   0.0208 0.0177   1.1698  0.2494
+
+sigma^2 estimated as 0.02120203 on 38 degrees of freedom 
+ 
+AIC = -0.6144113  AICc = -0.5766992  BIC = -0.3686625 
+ </code></pre>
+</div>
+</div>
+<p><strong>ARIMA(2,1,2)</strong> produces very similar diagnostic plots, but also comes with the added addvantages of a lower AIC value and all significant coefficients. Therefore, we will proceed with this model.</p>
+</section>
+<section id="benchmark-error-and-forecast-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="benchmark-error-and-forecast-comparison">Benchmark Error and Forecast Comparison</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ARIMA model &amp; show summary</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(ihme_ts, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">include.drift =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(fit)</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>acc <span class="ot">&lt;-</span> <span class="fu">accuracy</span>(fit)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>mae <span class="ot">&lt;-</span> acc[<span class="dv">1</span>, <span class="st">"MAE"</span>]</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>mse <span class="ot">&lt;-</span> (acc[<span class="dv">1</span>, <span class="st">"RMSE"</span>])<span class="sc">^</span><span class="dv">2</span>  </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># mean fit</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>mean_fit <span class="ot">&lt;-</span> <span class="fu">meanf</span>(ihme_ts)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>mean_acc <span class="ot">&lt;-</span> <span class="fu">accuracy</span>(mean_fit)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>mean_mae <span class="ot">&lt;-</span> mean_acc[<span class="dv">1</span>, <span class="st">"MAE"</span>]</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>mean_mse <span class="ot">&lt;-</span> (mean_acc[<span class="dv">1</span>, <span class="st">"RMSE"</span>])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co"># naive fit</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>naive_fit <span class="ot">&lt;-</span> <span class="fu">naive</span>(ihme_ts)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>naive_acc <span class="ot">&lt;-</span> <span class="fu">accuracy</span>(naive_fit)</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>naive_mae <span class="ot">&lt;-</span> naive_acc[<span class="dv">1</span>, <span class="st">"MAE"</span>]</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>naive_mse <span class="ot">&lt;-</span> (naive_acc[<span class="dv">1</span>, <span class="st">"RMSE"</span>])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co"># drift fit</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>drift_fit <span class="ot">&lt;-</span> <span class="fu">rwf</span>(ihme_ts)</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>drift_acc <span class="ot">&lt;-</span> <span class="fu">accuracy</span>(drift_fit)</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>drift_mae <span class="ot">&lt;-</span> drift_acc[<span class="dv">1</span>, <span class="st">"MAE"</span>]</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>drift_mse <span class="ot">&lt;-</span> (drift_acc[<span class="dv">1</span>, <span class="st">"RMSE"</span>])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Results table</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"ARIMA(0,1,0)"</span>, <span class="st">"Mean"</span>, <span class="st">"Naive"</span>, <span class="st">"Drift"</span>),</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">MAE =</span> <span class="fu">c</span>(mae, mean_mae, naive_mae, drift_mae),</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">MSE =</span> <span class="fu">c</span>(mse, mean_mse, naive_mse, drift_mse)</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Display table</span></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(results, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"MAE and MSE for Each Model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>MAE and MSE for Each Model</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: right;">MAE</th>
+<th style="text-align: right;">MSE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ARIMA(0,1,0)</td>
+<td style="text-align: right;">0.110</td>
+<td style="text-align: right;">0.021</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mean</td>
+<td style="text-align: right;">0.332</td>
+<td style="text-align: right;">0.189</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Naive</td>
+<td style="text-align: right;">0.130</td>
+<td style="text-align: right;">0.031</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Drift</td>
+<td style="text-align: right;">0.130</td>
+<td style="text-align: right;">0.031</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The ARIMA model, compared to the Benchmarks, achieves the lowest mean absolute error and mean squared error.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate forecasts</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mean_forecast <span class="ot">&lt;-</span> <span class="fu">meanf</span>(ihme_ts, <span class="at">h =</span> <span class="dv">10</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>naive_forecast <span class="ot">&lt;-</span> <span class="fu">naive</span>(ihme_ts, <span class="at">h =</span> <span class="dv">10</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>drift_forecast <span class="ot">&lt;-</span> <span class="fu">rwf</span>(ihme_ts, <span class="at">drift =</span> <span class="cn">TRUE</span>, <span class="at">h =</span> <span class="dv">10</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>arima_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(fit, <span class="at">h =</span> <span class="dv">10</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert forecasts to data frames</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>mean_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">time</span>(mean_forecast<span class="sc">$</span>mean), <span class="at">Mean =</span> <span class="fu">as.numeric</span>(mean_forecast<span class="sc">$</span>mean))</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>naive_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">time</span>(naive_forecast<span class="sc">$</span>mean), <span class="at">Naive =</span> <span class="fu">as.numeric</span>(naive_forecast<span class="sc">$</span>mean))</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>drift_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">time</span>(drift_forecast<span class="sc">$</span>mean), <span class="at">Drift =</span> <span class="fu">as.numeric</span>(drift_forecast<span class="sc">$</span>mean))</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>arima_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">time</span>(arima_forecast<span class="sc">$</span>mean), <span class="at">ARIMA_Fit =</span> <span class="fu">as.numeric</span>(arima_forecast<span class="sc">$</span>mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original data</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>ihme_ts_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">time</span>(ihme_ts), <span class="at">Price =</span> <span class="fu">as.numeric</span>(ihme_ts))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Plotly plot</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>() <span class="sc">|&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_lines</span>(<span class="at">data =</span> ihme_ts_df, <span class="at">x =</span> <span class="sc">~</span>Date, <span class="at">y =</span> <span class="sc">~</span>Price, <span class="at">name =</span> <span class="st">'Original Data'</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'black'</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_lines</span>(<span class="at">data =</span> mean_df, <span class="at">x =</span> <span class="sc">~</span>Date, <span class="at">y =</span> <span class="sc">~</span>Mean, <span class="at">name =</span> <span class="st">'Mean Forecast'</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'blue'</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_lines</span>(<span class="at">data =</span> naive_df, <span class="at">x =</span> <span class="sc">~</span>Date, <span class="at">y =</span> <span class="sc">~</span>Naive, <span class="at">name =</span> <span class="st">'Naïve Forecast'</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'red'</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_lines</span>(<span class="at">data =</span> drift_df, <span class="at">x =</span> <span class="sc">~</span>Date, <span class="at">y =</span> <span class="sc">~</span>Drift, <span class="at">name =</span> <span class="st">'Drift Forecast'</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'green'</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_lines</span>(<span class="at">data =</span> arima_df, <span class="at">x =</span> <span class="sc">~</span>Date, <span class="at">y =</span> <span class="sc">~</span>ARIMA_Fit, <span class="at">name =</span> <span class="st">'ARIMA Fit'</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">'purple'</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">'Maternal Hypertension Mortality Ratio Forecast'</span>,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">'Date'</span>),</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">'Ratio'</span>),</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">legend =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">'Forecast Methods'</span>)),</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">plot_bgcolor =</span> <span class="st">'#F7F1DE'</span>,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">paper_bgcolor =</span> <span class="st">'#F7F1DE'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-47bca48ba6845e83c2f9" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-47bca48ba6845e83c2f9">{"x":{"visdat":{"10e65c99d65a":["function () ","plotlyVisDat"],"10e677c7de34":["function () ","data"],"10e662cd655b":["function () ","data"],"10e61ab96c0a":["function () ","data"],"10e6364123b":["function () ","data"],"10e61ee8e13a":["function () ","data"]},"cur_data":"10e61ee8e13a","attrs":{"10e677c7de34":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","name":"Original Data","line":{"color":"black"},"inherit":true},"10e662cd655b":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","name":"Mean Forecast","line":{"color":"blue"},"inherit":true},"10e61ab96c0a":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","name":"Naïve Forecast","line":{"color":"red"},"inherit":true},"10e6364123b":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","name":"Drift Forecast","line":{"color":"green"},"inherit":true},"10e61ee8e13a":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","name":"ARIMA Fit","line":{"color":"purple"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Maternal Hypertension Mortality Ratio Forecast","xaxis":{"domain":[0,1],"automargin":true,"title":"Date"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Ratio"},"legend":{"title":{"text":"Forecast Methods"}},"plot_bgcolor":"#F7F1DE","paper_bgcolor":"#F7F1DE","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023],"y":[2.1498947091672216,1.8716144428733987,1.7817762418531002,1.8101764162295584,1.7564936745657651,1.7036067209210493,1.5928021129199457,1.5283289306647638,1.8528740740382932,1.7377132745286048,1.7860467259185839,1.7397236303605053,1.6914657753949518,1.6855008132400018,1.8078127105034201,1.5944038674396313,1.5716734051787071,1.6781793509126592,1.5451476362634209,1.7535773744906542,1.8425906115986701,1.8494689755233196,1.8141636703049893,1.9484395061038595,2.0435930203410737,2.0144547248794056,2.0245621530632958,2.0576518896216842,1.985491327276012,2.2335189504623241,1.9086628354282795,1.9708368565125651,2.1454107086422405,2.102051604206717,1.9939438064336907,2.4066718652244274,2.5665713704565056,2.6741111381245046,2.577751158795774,2.7211338389390654,3.3381454542437403,3.1316534124366724,2.9195060978976857,2.8293703429739132],"type":"scatter","mode":"lines","name":"Original Data","line":{"color":"black"},"marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2024,2025,2026,2027,2028,2029,2030,2031,2032,2033],"y":[2.0395128910671509,2.0395128910671509,2.0395128910671509,2.0395128910671509,2.0395128910671509,2.0395128910671509,2.0395128910671509,2.0395128910671509,2.0395128910671509,2.0395128910671509],"type":"scatter","mode":"lines","name":"Mean Forecast","line":{"color":"blue"},"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2024,2025,2026,2027,2028,2029,2030,2031,2032,2033],"y":[2.8293703429739132,2.8293703429739132,2.8293703429739132,2.8293703429739132,2.8293703429739132,2.8293703429739132,2.8293703429739132,2.8293703429739132,2.8293703429739132,2.8293703429739132],"type":"scatter","mode":"lines","name":"Naïve Forecast","line":{"color":"red"},"marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2024,2025,2026,2027,2028,2029,2030,2031,2032,2033],"y":[2.8451721018996503,2.8609738608253874,2.8767756197511241,2.8925773786768612,2.9083791376025983,2.9241808965283353,2.9399826554540724,2.9557844143798095,2.9715861733055462,2.9873879322312833],"type":"scatter","mode":"lines","name":"Drift Forecast","line":{"color":"green"},"marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2024,2025,2026,2027,2028,2029,2030,2031,2032,2033],"y":[3.0877413960873663,3.112076172486236,2.907966478284123,2.7779972961259976,2.8798208766085893,3.0436963759840454,3.0460389898780234,2.9095549660145523,2.8343553029636479,2.9087246648400513],"type":"scatter","mode":"lines","name":"ARIMA Fit","line":{"color":"purple"},"marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>It is clear that the ARIMA model provides a better fit and forecast than the simple baseline models.</p>
+</section>
+<section id="final-arima212-forecast" class="level2">
+<h2 class="anchored" data-anchor-id="final-arima212-forecast">Final ARIMA(2,1,2) Forecast</h2>
+<p>Finally, we isolate and plot the ARIMA forecast to observe the model’s 10-year prediction.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>forecast_result <span class="ot">&lt;-</span> <span class="fu">forecast</span>(fit, <span class="at">h =</span> <span class="dv">10</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(forecast_result) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ARIMA(0,1,0) Forecast"</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Time"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Predicted Price"</span>) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="time_series_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The forecasted mortality rate for the next 10 years appears to fit the shape and behavior as the historical mortality rate, and the confience interval is conservative and wide, but still within what appears to be an acceptable range. The forecast shows that the proportion of deaths caused by maternal hypertensive disorders will continue to oscillate as it has done in the past, but will generally stay close to the current level. This means that, according to the forecast, the rate will continue to stay below its COVID-19 peak, but it will not stabilize or reduce further in the next decade. If this forecast is considered seriously, it serves as a sign that further action — for example, improvements to the healthcare system and expanded access to it — will be necessary.</p>
 
 
 
-</main> <!-- /main -->
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-GBD2024" class="csl-entry" role="listitem">
+Global Burden of Disease Collaborative Network. 2024. <span>“Global Burden of Disease Study 2023 (GBD 2023) Results.”</span> Seattle, United States: Institute for Health Metrics; Evaluation (IHME). <a href="https://vizhub.healthdata.org/gbd-results/">https://vizhub.healthdata.org/gbd-results/</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

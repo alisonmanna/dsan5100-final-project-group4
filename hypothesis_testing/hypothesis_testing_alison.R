@@ -3,6 +3,8 @@
 # - **Null hypothesis** ($H_0$)
 # - **Alternative hypothesis** ($H_1$
 # Hypothesis test: ANOVA
+
+library(dplyr)
 library(ggplot2)
 library(car)
 library(effectsize)
@@ -51,3 +53,6 @@ summary_stats <- births_sample %>%
   )
 
 print(summary_stats)
+
+# see hypothesis_testing.qmd for the rest of the ANOVA
+
