@@ -74,19 +74,3 @@ chi_tab6 <- chisq(tab6)
 chi_tab6
 
 chi_tab6$expected
-
-
-
-
-
-
-# chronic conditions independent of pregnancy delivery route?
-
-# pre existing diabetes - need permutation test
-tab7 <- table(df$rf_pdiab, df$me_rout, dnn = c("Pre-existing Diabetes", "Deliveryt Route"))
-tab7
-
-chi_tab7 <- chisq(tab7)
-chi_tab7
-
-chi_tab7$expected
