@@ -1413,18 +1413,106 @@ F = 41.96, num df = 3.00, denom df = 776.26, p-value &lt; 2.2e-16</code></pre>
 <summary>Click to see code</summary>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use Games-Howell bc robust to unequal variances</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>games_howell <span class="ot">&lt;-</span> births_clean <span class="sc">|&gt;</span> <span class="fu">games_howell_test</span>(dbwt <span class="sc">~</span> condition_group)</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(games_howell)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(games_howell, <span class="at">caption=</span><span class="st">"Games-Howell Post-Hoc Test Results"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 8
-  .y.   group1          group2 estimate conf.low conf.high    p.adj p.adj.signif
-* &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       
-1 dbwt  No Conditions   Diabe…   -0.846    -49.1      47.4 1   e+ 0 ns          
-2 dbwt  No Conditions   Hyper… -175.      -216.     -133.  0        ****        
-3 dbwt  No Conditions   Both … -129.      -226.      -32.3 4   e- 3 **          
-4 dbwt  Diabetes Only   Hyper… -174.      -235.     -113.  4.61e-13 ****        
-5 dbwt  Diabetes Only   Both … -129.      -235.      -21.9 1.1 e- 2 *           
-6 dbwt  Hypertension O… Both …   45.3      -58.5     149.  6.73e- 1 ns          </code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in attr(x, "align"): 'xfun::attr()' is deprecated.
+Use 'xfun::attr2()' instead.
+See help("Deprecated")</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in attr(x, "format"): 'xfun::attr()' is deprecated.
+Use 'xfun::attr2()' instead.
+See help("Deprecated")</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Games-Howell Post-Hoc Test Results</caption>
+<colgroup>
+<col style="width: 5%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">.y.</th>
+<th style="text-align: left;">group1</th>
+<th style="text-align: left;">group2</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+<th style="text-align: right;">p.adj</th>
+<th style="text-align: left;">p.adj.signif</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">dbwt</td>
+<td style="text-align: left;">No Conditions</td>
+<td style="text-align: left;">Diabetes Only</td>
+<td style="text-align: right;">-0.8459207</td>
+<td style="text-align: right;">-49.11684</td>
+<td style="text-align: right;">47.42499</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: left;">ns</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dbwt</td>
+<td style="text-align: left;">No Conditions</td>
+<td style="text-align: left;">Hypertension Only</td>
+<td style="text-align: right;">-174.6358196</td>
+<td style="text-align: right;">-216.30103</td>
+<td style="text-align: right;">-132.97061</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">****</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dbwt</td>
+<td style="text-align: left;">No Conditions</td>
+<td style="text-align: left;">Both Conditions</td>
+<td style="text-align: right;">-129.3478443</td>
+<td style="text-align: right;">-226.42518</td>
+<td style="text-align: right;">-32.27050</td>
+<td style="text-align: right;">0.004</td>
+<td style="text-align: left;">**</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dbwt</td>
+<td style="text-align: left;">Diabetes Only</td>
+<td style="text-align: left;">Hypertension Only</td>
+<td style="text-align: right;">-173.7898989</td>
+<td style="text-align: right;">-234.55322</td>
+<td style="text-align: right;">-113.02657</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: left;">****</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dbwt</td>
+<td style="text-align: left;">Diabetes Only</td>
+<td style="text-align: left;">Both Conditions</td>
+<td style="text-align: right;">-128.5019236</td>
+<td style="text-align: right;">-235.05723</td>
+<td style="text-align: right;">-21.94662</td>
+<td style="text-align: right;">0.011</td>
+<td style="text-align: left;">*</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dbwt</td>
+<td style="text-align: left;">Hypertension Only</td>
+<td style="text-align: left;">Both Conditions</td>
+<td style="text-align: right;">45.2879753</td>
+<td style="text-align: right;">-58.49113</td>
+<td style="text-align: right;">149.06708</td>
+<td style="text-align: right;">0.673</td>
+<td style="text-align: left;">ns</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p><br></p>
