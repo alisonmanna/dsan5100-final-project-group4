@@ -26,6 +26,7 @@ library(ggplot2)
 library(car)
 library(rstatix)
 library(gt)
+library(kableExtra)
 ```
 
 ```{r}
@@ -425,7 +426,7 @@ Welch's ANOVA shows a highly significant difference in mean birth weight across 
 ```{r}
 # Use Games-Howell bc robust to unequal variances
 games_howell <- births_clean |> games_howell_test(dbwt ~ condition_group)
-print(games_howell)
+knitr::kable(games_howell, caption="Games-Howell Post-Hoc Test Results")
 ```
 
 <br>

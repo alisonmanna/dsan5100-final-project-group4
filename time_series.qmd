@@ -4,7 +4,7 @@ title: "Time Series Analysis"
 
 ## Mortality from Maternal Hypertensive Disorders (IHME)
 
-The World Health Organization (WHO) estimates that around 300,000 women globally died from pregnancy-related deaths in 2017, which is around 800 each day on average.
+The World Health Organization (WHO) estimates that about 300,000 women globally died from pregnancy-related deaths in 2017. On average, that's about 800 each day.
 
 According to the ICD-11, maternal deaths are defined as the deaths of women while pregnant or within 42 days of termination of pregnancy, from pregnancy-related causes, but excluding accidental or incidental causes of death.
 
@@ -50,9 +50,9 @@ head(ihme)
 
 ```{r}
 plot <- ggplot(ihme, aes(year, mortality)) + 
-  geom_point(color = "#A8BBA3", size = 0.6) +
-  geom_line(color = "#A8BBA3", size = 0.5) + 
-  labs(title = "Maternal Mortality Ratio from Hypertensive Disorders in the United States, 1980-2023",
+  geom_point(color = "#A8BBA3", size = 0.9) +
+  geom_line(color = "#A8BBA3", size = 0.8) + 
+  labs(title = "Maternal Mortality Ratio from Hypertensive Disorders\nin the United States, 1980-2023",
     x = "Year",
     y = "Mortality Ratio") +
   theme_minimal() + 
@@ -70,6 +70,7 @@ plot <- ggplot(ihme, aes(year, mortality)) +
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank())
 
+ggsave("img/maternal_mortality_timeseries.png", plot = plot, width = 7, height = 4.5, dpi = 300, bg = "#F7F1DE")
 # manual title because of ggplotly
 ggplotly(plot) |> layout(title = list(
   text = paste0(
@@ -379,7 +380,7 @@ drift_mse <- (drift_acc[1, "RMSE"])^2
 
 # Results table
 results <- data.frame(
-  Model = c("ARIMA(0,1,0)", "Mean", "Naive", "Drift"),
+  Model = c("ARIMA(2,1,2)", "Mean", "Naive", "Drift"),
   MAE = c(mae, mean_mae, naive_mae, drift_mae),
   MSE = c(mse, mean_mse, naive_mse, drift_mse)
 )
@@ -434,7 +435,7 @@ forecast_result <- forecast(fit, h = 10)
 
 # Plot
 autoplot(forecast_result) +
-  labs(title = "ARIMA(0,1,0) Forecast",
+  labs(title = "ARIMA(2,1,2) Forecast For Maternal Hypertension Mortality Ratio",
        x = "Time",
        y = "Predicted Price") +
   theme_bw()
